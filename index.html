@@ -5,362 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruquaiya | Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <style>
-
-        /* Your colors — the Phantom/Axiom vibe */
-       :root {
-    --bg:       #07060f;
-    --purple:   #8b5cf6;
-    --pink:     #ec4899;
-    --blue:     #2aaefa;
-    --text:     #f0ecff;
-    --muted:    #6b6a8d;
-    --border:   #1a1830;
-    --card:     #0f0d20;
-}
-        /* Remove default browser spacing */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-           font-family: 'Outfit', sans-serif;
-        }
-/* BACKGROUND ORBS */
-.bg-orbs {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.15;
-    animation: drift 12s ease-in-out infinite alternate;
-}
-
-.orb-1 {
-    width: 500px;
-    height: 500px;
-    background: var(--purple);
-    top: -100px;
-    left: -100px;
-    animation-duration: 14s;
-}
-
-.orb-2 {
-    width: 400px;
-    height: 400px;
-    background: var(--pink);
-    bottom: -100px;
-    right: -50px;
-    animation-duration: 10s;
-    animation-delay: -5s;
-}
-
-.orb-3 {
-    width: 300px;
-    height: 300px;
-    background: var(--blue);
-    top: 50%;
-    left: 50%;
-    animation-duration: 16s;
-    animation-delay: -8s;
-}
-
-@keyframes drift {
-    from { transform: translate(0, 0); }
-    to   { transform: translate(60px, 40px); }
-}
-        /* NAV */
-        nav {
-              position: fixed;
-            z-index: 100;
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.2rem 4rem;
-            background: rgba(7, 6, 15, 0.8);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
-            z-index: 100;
-        }
-
-       .nav-logo {
-        font-size: 1.3rem;
-        font-weight: 600;
-        background: linear-gradient(135deg, #c4b5fd, #f9a8d4);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--muted);
-            text-decoration: none;
-        }
-
-        .nav-links a:hover {
-            color: var(--text);
-        }
-
-/* HERO */
-#hero {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 6rem 4rem 0 4rem;
-}
-
-.hero-content {
-    max-width: 700px;
-}
-
-.hero-eyebrow {
-    font-size: 0.82rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #6dd5fa;
-    margin-bottom: 1.5rem;
-    opacity: 0.8;
-}
-
-.hero-name {
-    font-size: clamp(2.8rem, 7vw, 5rem);
-    font-weight: 500;
-    line-height: 1;
-    margin-bottom: 1rem;
-    color: #ffffff;
-    letter-spacing: 0.0em;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    position: relative;
-    display: inline-block;
-}
-
-.hero-name::after {
-    content: attr(data-text);
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, #8b5cf6, #ec4899, #2aaefa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: blur(12px);
-    opacity: 0.5;
-    z-index: -1;
-}
-
-.hero-tagline {
-    font-size: 1.25rem;
-    color: #a8a7c7;
-    line-height: 1.85;
-    max-width: 540px;
-    margin-bottom: 2.5rem;
-    font-weight: 300;
-}
-.hero-tagline span {
-    color: #a8a7c7;
-    font-weight: 300;
-}
-
-.hero-ctas {
-    display: flex;
-    gap: 1rem;
-}
-
-.btn-primary {
-    padding: 0.8rem 1.8rem;
-    background: linear-gradient(135deg, #8b5cf6, #ec4899);
-    color: white;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: opacity 0.2s, transform 0.2s;
-}
-
-.btn-primary:hover {
-    opacity: 0.85;
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    padding: 0.8rem 1.8rem;
-    background: transparent;
-    color: var(--muted);
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    transition: color 0.2s, border-color 0.2s, transform 0.2s;
-}
-
-.btn-secondary:hover {
-    color: var(--text);
-    border-color: var(--purple);
-    transform: translateY(-2px);
-}
-
-/* SCROLL REVEAL */
-.reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* SKILLS */
-#skills {
-    position: relative;
-    z-index: 1;
-    padding: 6rem 4rem;
-}
-
-.skills-wrap {
-    max-width: 900px;
-}
-
-.section-eyebrow {
-    font-size: 0.82rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #6dd5fa;
-    margin-bottom: 1.5rem;
-    opacity: 0.8;
-    display: block;
-}
-
-.section-title {
-    font-size: clamp(2.8rem, 7vw, 5rem);
-    font-weight: 500;
-    line-height: 1;
-    margin-bottom: 3rem;
-    color: #ffffff;
-    letter-spacing: 0.0em;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    position: relative;
-    display: inline-block;
-}
-
-.section-title::after {
-    content: attr(data-text);
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, #8b5cf6, #ec4899, #2aaefa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: blur(12px);
-    opacity: 0.5;
-    z-index: -1;
-}
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.2rem;
-}
-
-.skill-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.6rem;
-    transition: transform 0.2s, border-color 0.2s;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Gradient line that appears on top of card on hover */
-.skill-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(135deg, #8b5cf6, #ec4899, #2aaefa);
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
-.skill-card:hover {
-    transform: translateY(-4px);
-    border-color: #8b5cf630;
-}
-
-.skill-card:hover::before {
-    opacity: 1;
-}
-
-/* Dimmed style for coming soon card */
-.skill-card-soon {
-    opacity: 0.5;
-}
-
-.skill-card-top {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 1.2rem;
-}
-
-.skill-icon {
-    font-size: 1.4rem;
-}
-
-.skill-name {
-    font-size: 0.78rem;
-    font-weight: 400;
-    color: #ffffff;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    font-family: 'Outfit', sans-serif;
-}
-
-.skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.tag {
-    font-size: 0.75rem;
-    padding: 0.3rem 0.7rem;
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.2);
-    border-radius: 20px;
-    color: #c4b5fd;
-}
-
-    </style>
-
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -376,23 +22,49 @@
     <nav>
         <div class="nav-logo">Ruquaiya Ali</div>
         <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+           <li><a href="#about">ABOUT</a></li>
+            <li><a href="#skills">SKILLS</a></li>
+            <li><a href="#projects">PROJECTS</a></li>
+            <li><a href="#contact">CONTACT</a></li>
         </ul>
     </nav>
 
-<section id="hero">
-    <div class="hero-content">
-        <p class="hero-eyebrow reveal">// McMaster University · 2030</p>
-        <h1 class="hero-name reveal" data-text="About Me">About Me</h1>
-        <p class="hero-tagline reveal">
-            I'm <span>Ruquaiya</span>, an Automation Engineering Technology student at McMaster University — building real skills in automation, control systems, robotics, and AI to land a high-impact engineering role upon graduation.
-        </p>
-        <div class="hero-ctas reveal">
-            <a href="#projects" class="btn-primary">View Projects →</a>
-            <a href="#contact" class="btn-secondary">Get in Touch</a>
+<section id="about">
+    <div class="hero-inner">
+        <div class="hero-content">
+            <p class="hero-eyebrow reveal">// McMaster University</p>
+            <h1 class="hero-name reveal" data-text="About Me">About Me</h1>
+            <p class="hero-tagline reveal">
+                I'm <span>Ruquaiya</span>, an Automation Engineering Technology student at McMaster University — building real skills in automation, control systems, robotics, and AI to land a high-impact engineering role upon graduation.
+            </p>
+            <div class="hero-ctas reveal">
+                <a href="#projects" class="btn-primary">View Projects</a>
+                <a href="#contact" class="btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+
+        <div class="hero-credentials">
+            <div class="credential-card reveal">
+                <div>
+                    <p class="credential-label">Bachelor of Technology</p>
+                    <p class="credential-title">Automation Engineering Technology</p>
+                    <p class="credential-school">McMaster University</p>
+                </div>
+            </div>
+            <div class="credential-card reveal">
+                <div>
+                    <p class="credential-label">Advanced Diploma</p>
+                    <p class="credential-title">Chemical Engineering Technology</p>
+                    <p class="credential-school">McMaster University</p>
+                </div>
+            </div>
+            <div class="credential-card reveal">
+                <div>
+                    <p class="credential-label">Certificate</p>
+                    <p class="credential-title">Business Management</p>
+                    <p class="credential-school">McMaster University</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -457,20 +129,109 @@
     </div>
 </section>
 
-<script>
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, i * 100);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
+<section id="projects">
+    <div class="projects-wrap">
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
+        <p class="section-eyebrow reveal">// what i've built</p>
+        <h2 class="section-title reveal" data-text="Projects">Projects</h2>
+
+        <div class="projects-grid">
+
+            <div class="project-card reveal">
+                <div class="project-card-top">
+                    <span class="project-status">Coming Soon</span>
+                </div>
+                <h3 class="project-name">// Project 1</h3>
+                <p class="project-desc">Description coming soon.</p>
+                <div class="project-tags">
+                    <span class="tag">Skill</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal">
+                <div class="project-card-top">
+                    <span class="project-status">Coming Soon</span>
+                </div>
+                <h3 class="project-name">// Project 2</h3>
+                <p class="project-desc">Description coming soon.</p>
+                <div class="project-tags">
+                    <span class="tag">Skill</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal">
+                <div class="project-card-top">
+                    <span class="project-status">Coming Soon</span>
+                </div>
+                <h3 class="project-name">// Project 3</h3>
+                <p class="project-desc">Description coming soon.</p>
+                <div class="project-tags">
+                    <span class="tag">Skill</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal">
+                <div class="project-card-top">
+                    <span class="project-status">Coming Soon</span>
+                </div>
+                <h3 class="project-name">// Project 4</h3>
+                <p class="project-desc">Description coming soon.</p>
+                <div class="project-tags">
+                    <span class="tag">Skill</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="contact-wrap">
+
+        <p class="section-eyebrow reveal">// get in touch</p>
+        <h2 class="section-title reveal" data-text="CONTACT">Contact</h2>
+
+        <div class="contact-inner">
+
+            <form class="contact-form reveal" action="https://formspree.io/f/xojkqzwk" method="POST">
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input class="form-input" type="text" name="name" placeholder="Your name" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input class="form-input" type="email" name="email" placeholder="your@email.com" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-input form-textarea" name="message" placeholder="What's on your mind?" required></textarea>
+                </div>
+                <button class="btn-primary" type="submit">Send Message</button>
+            </form>
+
+            <div class="contact-links reveal">
+    <p class="section-eyebrow">// Links</p>
+    <a href="https://linkedin.com/in/ruquaiya-ali" class="contact-chip" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#c4b5fd"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        <span class="chip-label">// LinkedIn</span>
+    </a>
+    <a href="https://github.com/ruquaiya-ali" class="contact-chip" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#c4b5fd"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
+        <span class="chip-label">// GitHub</span>
+    </a>
+</div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<footer>
+    <p class="footer-text">Designed & Built by <span>Ruquaiya Ali</span> · 2026</p>
+</footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
