@@ -131,9 +131,13 @@ nav {
     gap: 5px;
     background: none;
     border: none;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
     cursor: pointer;
     padding: 6px;
     z-index: 101;
+    color: var(--text);
 }
 
 .nav-toggle span {
