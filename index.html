@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruquaiya | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <style>
+
+        /* Your colors — the Phantom/Axiom vibe */
+       :root {
+    --bg:       #07060f;
+    --purple:   #8b5cf6;
+    --pink:     #ec4899;
+    --blue:     #2aaefa;
+    --text:     #f0ecff;
+    --muted:    #6b6a8d;
+    --border:   #1a1830;
+    --card:     #0f0d20;
+}
+        /* Remove default browser spacing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+           font-family: 'Outfit', sans-serif;
+        }
+/* BACKGROUND ORBS */
+.bg-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    animation: drift 12s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: var(--purple);
+    top: -100px;
+    left: -100px;
+    animation-duration: 14s;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: var(--pink);
+    bottom: -100px;
+    right: -50px;
+    animation-duration: 10s;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 300px;
+    height: 300px;
+    background: var(--blue);
+    top: 50%;
+    left: 50%;
+    animation-duration: 16s;
+    animation-delay: -8s;
+}
+
+@keyframes drift {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(60px, 40px); }
+}
+        /* NAV */
+        nav {
+              position: fixed;
+            z-index: 100;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 4rem;
+            background: rgba(7, 6, 15, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+       .nav-logo {
+        font-size: 1.3rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #c4b5fd, #f9a8d4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+/* HERO */
+#hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 4rem 0 4rem;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #6dd5fa;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.hero-name {
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    letter-spacing: 0.0em;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    position: relative;
+    display: inline-block;
+}
+
+.hero-name::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #8b5cf6, #ec4899, #2aaefa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(12px);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.hero-tagline {
+    font-size: 1.25rem;
+    color: #a8a7c7;
+    line-height: 1.85;
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+}
+.hero-tagline span {
+    color: #a8a7c7;
+    font-weight: 300;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-primary {
+    padding: 0.8rem 1.8rem;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: white;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    padding: 0.8rem 1.8rem;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.btn-secondary:hover {
+    color: var(--text);
+    border-color: var(--purple);
+    transform: translateY(-2px);
+}
+
+/* SCROLL REVEAL */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* SKILLS */
+#skills {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 4rem;
+}
+
+.skills-wrap {
+    max-width: 900px;
+}
+
+.section-eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #6dd5fa;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+    display: block;
+}
+
+.section-title {
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 3rem;
+    color: #ffffff;
+    letter-spacing: 0.0em;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #8b5cf6, #ec4899, #2aaefa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(12px);
+    opacity: 0.5;
+    z-index: -1;
+}
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+}
+
+.skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.6rem;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gradient line that appears on top of card on hover */
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899, #2aaefa);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.skill-card:hover {
+    transform: translateY(-4px);
+    border-color: #8b5cf630;
+}
+
+.skill-card:hover::before {
+    opacity: 1;
+}
+
+/* Dimmed style for coming soon card */
+.skill-card-soon {
+    opacity: 0.5;
+}
+
+.skill-card-top {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+}
+
+.skill-icon {
+    font-size: 1.4rem;
+}
+
+.skill-name {
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-family: 'Outfit', sans-serif;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 20px;
+    color: #c4b5fd;
+}
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+<div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+    <nav>
+        <div class="nav-logo">Ruquaiya Ali</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+<section id="hero">
+    <div class="hero-content">
+        <p class="hero-eyebrow reveal">// McMaster University · 2030</p>
+        <h1 class="hero-name reveal" data-text="About Me">About Me</h1>
+        <p class="hero-tagline reveal">
+            I'm <span>Ruquaiya</span>, an Automation Engineering Technology student at McMaster University — building real skills in automation, control systems, robotics, and AI to land a high-impact engineering role upon graduation.
+        </p>
+        <div class="hero-ctas reveal">
+            <a href="#projects" class="btn-primary">View Projects →</a>
+            <a href="#contact" class="btn-secondary">Get in Touch</a>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="skills-wrap">
+
+        <p class="section-eyebrow reveal">// what i work with</p>
+        <h2 class="section-title reveal" data-text="Skills">Skills</h2>
+
+        <div class="skills-grid">
+
+            <div class="skill-card reveal">
+                <div class="skill-card-top">
+                    <h3 class="skill-name">// Programming</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Object Oriented Programming</span>
+                    <span class="tag">HTML</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">JavaScript</span>
+                </div>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-card-top">
+                    <h3 class="skill-name">// Engineering</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Circuit Analysis</span>
+                    <span class="tag">Multisim</span>
+                    <span class="tag">Arduino</span>
+                    <span class="tag">AutoCAD</span>
+                    <span class="tag">AutoDesk Inventor</span>
+                    <span class="tag">Analytical Chemistry</span>
+                </div>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-card-top">
+                    <h3 class="skill-name">// Productivity</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Microsoft Excel</span>
+                    <span class="tag">Microsoft Word</span>
+                    <span class="tag">Microsoft PowerPoint</span>
+                </div>
+            </div>
+
+            <div class="skill-card reveal skill-card-soon">
+                <div class="skill-card-top">
+                    <h3 class="skill-name">// Coming Soon</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">More...</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, i * 100);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
