@@ -1027,11 +1027,17 @@ footer {
     #about {
         padding: calc(var(--nav-h) + 3rem) 1.5rem 2rem;
         align-items: flex-start;
+        overflow: hidden;
     }
 
     .hero-inner {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
     }
 
     .hero-name, .section-title {
@@ -1060,8 +1066,22 @@ footer {
     }
 
     /* Cards */
-    .hero-credentials { gap: 0.8rem; }
-    .credential-card { padding: 1rem; }
+    .hero-credentials {
+        gap: 0.8rem;
+        width: 100%;
+    }
+
+    .credential-card {
+        padding: 1rem;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .credential-title {
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: unset;
+    }
 
     /* iOS: prevent auto-zoom on input focus */
     .form-input { font-size: 16px; }
