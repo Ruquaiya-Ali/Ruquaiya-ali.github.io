@@ -122,7 +122,7 @@ nav {
     color: var(--text);
 }
 
-/* HERO */
+
 #about {
     position: relative;
     z-index: 1;
@@ -130,7 +130,10 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6rem 4rem 3rem 4rem;
+   #about {
+    padding: 7rem 1.5rem 2rem 1.5rem;
+}
+
 }
 
 .hero-inner {
@@ -139,7 +142,7 @@ nav {
     gap: 4rem;
     align-items: center;
     width: 100%;
-    max-width: 1100px;
+    max-width: 900px;
 }
 
 .hero-content {
