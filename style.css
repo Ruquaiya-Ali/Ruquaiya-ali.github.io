@@ -127,31 +127,35 @@ nav {
 .nav-toggle {
     display: none;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 6px;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
     background: none;
     border: none;
     outline: none;
     -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
-    padding: 6px;
+    padding: 0;
     z-index: 101;
-    color: var(--text);
 }
 
 .nav-toggle span {
     display: block;
-    width: 22px;
+    width: 24px;
     height: 2px;
-    background: var(--text);
+    background-color: #f0ecff;
     border-radius: 2px;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
 }
 
-.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* SECTIONS — offset scroll so content isn't hidden under fixed nav */
 section {
@@ -675,7 +679,7 @@ footer {
 }
 
 /* Tablet */
-@media (max-width: 1024px) and (min-width: 769px) {
+@media (max-width: 1024px) and (min-width: 768px) {
     nav { padding: 0 2rem; }
 
     #about { padding: 6rem 2rem 3rem; }
@@ -702,14 +706,13 @@ footer {
 }
 
 /* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     /* Nav */
     nav { padding: 0 1.5rem; }
 
     .nav-toggle { display: flex; }
 
     .nav-links {
-        display: none;
         position: fixed;
         top: var(--nav-h);
         left: 0;
@@ -722,9 +725,15 @@ footer {
         border-bottom: 1px solid var(--border);
         padding: 0.5rem 0 1rem;
         z-index: 99;
+        /* Hidden by default */
+        display: none;
+        pointer-events: none;
     }
 
-    .nav-links.open { display: flex; }
+    .nav-links.open {
+        display: flex;
+        pointer-events: auto;
+    }
 
     .nav-links li { width: 100%; }
 
