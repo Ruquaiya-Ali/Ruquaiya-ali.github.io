@@ -1,3 +1,40 @@
+// FORM — intercept submit, send via fetch, then clear inputs
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = new FormData(contactForm);
+        try {
+            const res = await fetch(contactForm.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+                contactForm.reset();
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = '// Message sent successfully';
+                document.body.appendChild(toast);
+                setTimeout(() => toast.classList.add('show'), 10);
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 400);
+                }, 3000);
+            }
+        } catch (_) {
+            // silently fail — form still attempted
+        }
+    });
+}
+
+// FLIP CARDS — click to flip
+document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+    });
+});
+
 // HAMBURGER MENU
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-links');
@@ -27,7 +64,9 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}, 100);
 
 // ACTIVE NAV LINK ON SCROLL
 const sections = document.querySelectorAll('section');
