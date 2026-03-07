@@ -1,3 +1,19 @@
+// HAMBURGER MENU
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('open');
+    navMenu.classList.toggle('open');
+});
+
+navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navMenu.classList.remove('open');
+    });
+});
+
 // SCROLL REVEAL — repeats every time you enter/leave a section
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
