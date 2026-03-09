@@ -535,16 +535,14 @@ section {
 /* FLIP CARDS */
 .flip-card {
     perspective: 1000px;
-    height: auto;
+    height: 480px;
     width: 100%;
-    min-height: 320px;
 }
 
 .flip-card-inner {
     position: relative;
     width: 100%;
-    height: auto;
-    min-height: 320px;
+    height: 100%;
     transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
     transform-style: preserve-3d;
 }
@@ -557,7 +555,7 @@ section {
 .flip-card-back {
     position: absolute;
     width: 100%;
-    height: auto;
+    height: 100%;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: 12px;
@@ -592,6 +590,7 @@ section {
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
+    height: 100%;
 }
 
 .flip-card-back .back-desc {
@@ -608,6 +607,10 @@ section {
     gap: 0.5rem;
 }
 
+.flip-card-front .back-hint {
+    margin-top: 1rem;
+}
+
 .flip-card-back .back-hint {
     font-size: 0.65rem;
     letter-spacing: 0.2em;
@@ -616,6 +619,55 @@ section {
     opacity: 0.7;
     font-family: 'Outfit', sans-serif;
     margin-top: auto;
+}
+
+.back-highlights {
+    margin-top: 0;
+}
+
+.back-highlights-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6dd5fa;
+    opacity: 0.7;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 0.4rem;
+}
+
+.back-highlights-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.back-highlights-list li {
+    font-size: 11px;
+    color: #a8a7c7;
+    font-weight: 300;
+    font-family: 'Outfit', sans-serif;
+    padding-left: 0.8rem;
+    position: relative;
+    line-height: 1.5;
+}
+
+.back-highlights-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--purple);
+    opacity: 0.7;
+}
+
+/* Video fade-in on page load */
+@keyframes videoFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+#projects .flip-card-front video {
+    animation: videoFadeIn 0.8s ease forwards;
 }
 
 .project-image {
@@ -1059,6 +1111,13 @@ footer {
     .skills-grid { grid-template-columns: 1fr; }
 
     .projects-grid { grid-template-columns: 1fr; }
+
+    /* Flip cards: shorter on mobile since cards are stacked (equal height not needed) */
+    .flip-card { height: 420px; }
+
+    /* Reduce video height on mobile so name/tags/hint all stay visible */
+    #projects .flip-card-front .project-image { height: 160px !important; }
+    #projects .flip-card-front video { height: 160px !important; }
 
     .contact-inner {
         grid-template-columns: 1fr;
