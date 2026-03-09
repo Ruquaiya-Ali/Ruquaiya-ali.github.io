@@ -1,7 +1,7 @@
 # Ruquaiya Ali — Portfolio Website
 
 Personal portfolio website built from scratch using HTML, CSS, and JavaScript.
-Live at: [your domain or github pages link]
+Live at: https://ruquaiya-ali.github.io/
 
 ## Built With
 - HTML5
