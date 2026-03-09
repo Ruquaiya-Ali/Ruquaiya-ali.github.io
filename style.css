@@ -160,7 +160,7 @@ nav {
 }
 
 .nav-logo {
-    font-size: 1.3rem;
+    font-size: 1.50rem;
     font-weight: 600;
     background: linear-gradient(135deg, #c4b5fd, #f9a8d4);
     -webkit-background-clip: text;
@@ -175,7 +175,7 @@ nav {
 }
 
 .nav-links a {
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
@@ -285,7 +285,7 @@ section {
 .credential-card:hover::before { opacity: 1; }
 
 .credential-label {
-    font-size: 0.82rem;
+    font-size: 0.94rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -295,7 +295,7 @@ section {
 }
 
 .credential-title {
-    font-size: 0.78rem;
+    font-size: 0.90rem;
     font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.3em;
@@ -308,13 +308,13 @@ section {
 }
 
 .credential-school {
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     color: #a8a7c7;
     font-weight: 300;
 }
 
 .hero-eyebrow {
-    font-size: 0.82rem;
+    font-size: 0.94rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -323,7 +323,7 @@ section {
 }
 
 .hero-name {
-    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-size: clamp(2.53rem, 6.9vw, 4.6rem);
     font-weight: 500;
     line-height: 1;
     margin-bottom: 1rem;
@@ -349,7 +349,7 @@ section {
 }
 
 .hero-tagline {
-    font-size: 1.25rem;
+    font-size: 1.44rem;
     color: #a8a7c7;
     line-height: 1.85;
     max-width: 540px;
@@ -373,7 +373,7 @@ section {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     color: white;
-    font-size: 0.75rem;
+    font-size: 0.86rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     text-decoration: none;
@@ -393,7 +393,7 @@ section {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     color: var(--muted);
-    font-size: 0.75rem;
+    font-size: 0.86rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     text-decoration: none;
@@ -433,7 +433,7 @@ section {
 }
 
 .section-eyebrow {
-    font-size: 0.82rem;
+    font-size: 0.94rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -443,7 +443,7 @@ section {
 }
 
 .section-title {
-    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-size: clamp(2.53rem, 6.9vw, 4.6rem);
     font-weight: 500;
     line-height: 1;
     margin-bottom: 3rem;
@@ -509,7 +509,7 @@ section {
 }
 
 .skill-name {
-    font-size: 0.78rem;
+    font-size: 0.90rem;
     font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.3em;
@@ -524,7 +524,7 @@ section {
 }
 
 .tag {
-    font-size: 0.75rem;
+    font-size: 0.86rem;
     padding: 0.3rem 0.7rem;
     background: rgba(139, 92, 246, 0.1);
     border: 1px solid rgba(139, 92, 246, 0.2);
@@ -535,14 +535,14 @@ section {
 /* FLIP CARDS */
 .flip-card {
     perspective: 1000px;
-    height: 480px;
+    height: 552px !important;
     width: 100%;
 }
 
 .flip-card-inner {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 552px !important;
     transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
     transform-style: preserve-3d;
 }
@@ -555,7 +555,7 @@ section {
 .flip-card-back {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 552px !important;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: 12px;
@@ -594,7 +594,7 @@ section {
 }
 
 .flip-card-back .back-desc {
-    font-size: 0.95rem;
+    font-size: 1.09rem;
     color: #a8a7c7;
     line-height: 1.7;
     font-weight: 300;
@@ -612,7 +612,7 @@ section {
 }
 
 .flip-card-back .back-hint {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -626,7 +626,7 @@ section {
 }
 
 .back-highlights-label {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -643,7 +643,7 @@ section {
 }
 
 .back-highlights-list li {
-    font-size: 11px;
+    font-size: 13px;
     color: #a8a7c7;
     font-weight: 300;
     font-family: 'Outfit', sans-serif;
@@ -672,7 +672,7 @@ section {
 
 .project-image {
     width: 100%;
-    height: 120px;
+    height: 138px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 1rem;
@@ -682,7 +682,7 @@ section {
     align-items: center;
     justify-content: center;
     color: var(--muted);
-    font-size: 0.75rem;
+    font-size: 0.86rem;
     letter-spacing: 0.15em;
     font-family: 'Outfit', sans-serif;
 }
@@ -742,7 +742,7 @@ section {
 }
 
 .project-status {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
@@ -753,7 +753,7 @@ section {
 }
 
 .project-name {
-    font-size: 0.78rem;
+    font-size: 0.90rem;
     font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.3em;
@@ -763,7 +763,7 @@ section {
 }
 
 .project-desc {
-    font-size: 0.95rem;
+    font-size: 1.09rem;
     color: #a8a7c7;
     line-height: 1.7;
     font-weight: 300;
@@ -800,7 +800,7 @@ section {
 .github-link {
     display: inline-block;
     margin-top: 1.2rem;
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
@@ -873,7 +873,7 @@ section {
 }
 
 .form-label {
-    font-size: 0.72rem;
+    font-size: 0.83rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -891,7 +891,7 @@ section {
     padding: 0.85rem 1rem;
     color: var(--text);
     font-family: 'Outfit', sans-serif;
-    font-size: 0.95rem;
+    font-size: 1.09rem;
     font-weight: 300;
     outline: none;
     transition: border-color 0.2s;
@@ -903,7 +903,7 @@ section {
 
 .form-textarea {
     resize: vertical;
-    min-height: 140px;
+    min-height: 161px;
 }
 
 .contact-chip {
@@ -953,7 +953,7 @@ section {
 }
 
 .chip-label {
-    font-size: 0.78rem;
+    font-size: 0.90rem;
     font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.3em;
@@ -973,7 +973,7 @@ footer {
 }
 
 .footer-text {
-    font-size: 0.75rem;
+    font-size: 0.86rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
@@ -1002,11 +1002,11 @@ footer {
     .personal-wrap,
     .contact-wrap { max-width: 1200px; }
 
-    .hero-tagline { font-size: 1.35rem; }
-    .section-eyebrow, .hero-eyebrow { font-size: 0.9rem; }
-    .credential-title { font-size: 1.05rem; }
-    .project-desc { font-size: 1rem; }
-    .skill-name, .project-name { font-size: 0.85rem; }
+    .hero-tagline { font-size: 1.55rem; }
+    .section-eyebrow, .hero-eyebrow { font-size: 1.04rem; }
+    .credential-title { font-size: 1.21rem; }
+    .project-desc { font-size: 1.15rem; }
+    .skill-name, .project-name { font-size: 0.98rem; }
 }
 
 /* Tablet */
@@ -1032,7 +1032,7 @@ footer {
     }
 
     .hero-name, .section-title {
-        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-size: clamp(2.3rem, 5.75vw, 4.03rem);
     }
 }
 
@@ -1071,7 +1071,7 @@ footer {
     .nav-links a {
         display: block;
         padding: 0.85rem 2rem;
-        font-size: 0.8rem;
+        font-size: 0.92rem;
         letter-spacing: 0.2em;
     }
 
@@ -1093,10 +1093,10 @@ footer {
     }
 
     .hero-name, .section-title {
-        font-size: clamp(1.8rem, 8vw, 2.8rem);
+        font-size: clamp(2.07rem, 9.2vw, 3.22rem);
     }
 
-    .hero-tagline { font-size: 1rem; }
+    .hero-tagline { font-size: 1.15rem; }
 
     .hero-ctas { flex-direction: column; }
 
@@ -1113,7 +1113,10 @@ footer {
     .projects-grid { grid-template-columns: 1fr; }
 
     /* Flip cards: shorter on mobile since cards are stacked (equal height not needed) */
-    .flip-card { height: 420px; }
+    .flip-card          { height: 483px !important; }
+    .flip-card-inner    { height: 483px !important; }
+    .flip-card-front    { height: 483px !important; }
+    .flip-card-back     { height: 483px !important; }
 
     /* Reduce video height on mobile so name/tags/hint all stay visible */
     #projects .flip-card-front .project-image { height: 160px !important; }
@@ -1143,7 +1146,7 @@ footer {
     }
 
     /* iOS: prevent auto-zoom on input focus */
-    .form-input { font-size: 16px; }
+    .form-input { font-size: 18px; }
 
     footer { padding: 1.5rem; }
 
@@ -1157,11 +1160,11 @@ footer {
 
 /* Small phones */
 @media (max-width: 380px) {
-    .nav-logo { font-size: 1rem; }
+    .nav-logo { font-size: 1.15rem; }
 
-    .hero-name, .section-title { font-size: 1.8rem; }
+    .hero-name, .section-title { font-size: 2.07rem; }
 
-    .hero-tagline { font-size: 0.9rem; }
+    .hero-tagline { font-size: 1.04rem; }
 }
 
 
@@ -1178,7 +1181,7 @@ footer {
     border-radius: 8px;
     color: #6dd5fa;
     font-family: 'Outfit', sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.86rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
