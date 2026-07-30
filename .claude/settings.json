@@ -1,5 +1,13 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(command -v chromium-cli)",
+      "Bash(command -v playwright)",
+      "Read(//c/Users/Ruqua/.claude/**)",
+      "Bash(npm ls *)",
+      "Bash(npx --yes playwright --version)",
+      "Bash(node screenshot.js)"
+    ],
     "additionalDirectories": [
       "c:\\Users\\Ruqua\\OneDrive\\Desktop\\Portfolio"
     ]
