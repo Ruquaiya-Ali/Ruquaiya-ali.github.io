@@ -890,40 +890,6 @@ img.project-image {
     opacity: 0.9;
 }
 
-/* LAB WORK */
-#lab-work {
-    position: relative;
-    z-index: 1;
-    padding: 3rem 4rem;
-    display: flex;
-    justify-content: center;
-}
-
-.lab-wrap {
-    max-width: 900px;
-    width: 100%;
-}
-
-.lab-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.2rem;
-    width: 100%;
-}
-
-.github-link {
-    display: inline-block;
-    margin-top: 1.2rem;
-    font-size: 0.82rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.github-link:hover { color: var(--text); }
-
 /* CONTACT */
 #contact {
     position: relative;
@@ -1093,13 +1059,12 @@ footer {
 @media (min-width: 1024px) {
     nav { padding: 0 4rem; }
     #about { padding: 6rem 6rem 3rem; }
-    #skills, #projects, #lab-work, #contact { padding: 3rem 6rem; }
+    #skills, #projects, #contact { padding: 3rem 6rem; }
     #experience { padding: 3rem 6rem; }
 
     .hero-inner,
     .skills-wrap,
     .projects-wrap,
-    .lab-wrap,
     .contact-wrap { max-width: 1200px; }
 
     .experience-wrap { max-width: 1200px; }
@@ -1136,7 +1101,7 @@ footer {
         gap: 2rem;
     }
 
-    #skills, #projects, #lab-work, #contact { padding: 3rem 2rem; }
+    #skills, #projects, #contact { padding: 3rem 2rem; }
 
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1281,9 +1246,6 @@ footer {
     .form-input { font-size: 16px; }
 
     footer { padding: 1.5rem; }
-
-    /* Sections */
-    #lab-work { padding: 2.5rem 1.5rem; }
 
     /* Push pink orb off-screen on mobile to avoid colored bar */
     .orb-2 { bottom: -300px; right: -120px; }
