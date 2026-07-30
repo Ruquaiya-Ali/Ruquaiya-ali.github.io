@@ -1299,8 +1299,7 @@ footer {
 .contact-chip.reveal,
 .contact-form.reveal,
 .project-card.reveal,
-.flip-card.reveal,
-#lab-work .project-card.reveal {
+.flip-card.reveal {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.7s ease, transform 0.7s ease;
@@ -1311,8 +1310,7 @@ footer {
 .contact-chip.reveal.visible,
 .contact-form.reveal.visible,
 .project-card.reveal.visible,
-.flip-card.reveal.visible,
-#lab-work .project-card.reveal.visible {
+.flip-card.reveal.visible {
     opacity: 1;
     transform: translateY(0);
 }
