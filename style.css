@@ -676,6 +676,7 @@ img.project-image {
     object-position: top;
     border-radius: 8px;
     margin-bottom: 1rem;
+    background: rgba(139, 92, 246, 0.05);
 }
 
 /* PROJECTS */
