@@ -874,11 +874,11 @@ img.project-image {
 .experience-footer {
     display: flex;
     justify-content: flex-end;
-    margin-top: 1.2rem;
+    margin-top: 1.5rem;
 }
 
 .company-logo {
-    height: 28px;
+    height: 36px;
     width: auto;
     opacity: 0.6;
     filter: brightness(0) invert(1);
