@@ -550,6 +550,11 @@ section {
     max-height: 100%;
 }
 
+.flip-card-front {
+    display: flex;
+    flex-direction: column;
+}
+
 .flip-card-front::before,
 .flip-card-back::before {
     content: '';
@@ -613,7 +618,8 @@ section {
 }
 
 .flip-card-front .back-hint {
-    margin-top: 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
 }
 
 .flip-card-back .back-hint {
