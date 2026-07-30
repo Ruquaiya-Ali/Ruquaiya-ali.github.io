@@ -27,6 +27,7 @@ body {
     color: var(--text);
     font-family: 'Outfit', sans-serif;
     overflow-x: hidden;
+    font-size: 17px;
 }
 
 /* BACKGROUND ORBS */
@@ -176,7 +177,7 @@ nav {
 }
 
 .nav-links a {
-    font-size: 0.80rem;
+    font-size: 0.82rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
@@ -285,7 +286,7 @@ section {
 .credential-card:hover::before { opacity: 1; }
 
 .credential-label {
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -295,7 +296,7 @@ section {
 }
 
 .credential-title {
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.3em;
@@ -308,13 +309,13 @@ section {
 }
 
 .credential-school {
-    font-size: 0.80rem;
+    font-size: 0.88rem;
     color: #a8a7c7;
     font-weight: 300;
 }
 
 .hero-eyebrow {
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -323,7 +324,7 @@ section {
 }
 
 .hero-name {
-    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
     font-weight: 500;
     line-height: 1;
     margin-bottom: 1rem;
@@ -409,7 +410,7 @@ section {
 }
 
 .section-eyebrow {
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -419,7 +420,7 @@ section {
 }
 
 .section-title {
-    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
     font-weight: 500;
     line-height: 1;
     margin-bottom: 3rem;
@@ -485,7 +486,7 @@ section {
 }
 
 .skill-name {
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.3em;
@@ -500,7 +501,7 @@ section {
 }
 
 .tag {
-    font-size: 0.75rem;
+    font-size: 0.80rem;
     padding: 0.3rem 0.7rem;
     background: rgba(139, 92, 246, 0.1);
     border: 1px solid rgba(139, 92, 246, 0.2);
@@ -576,7 +577,7 @@ section {
 }
 
 .flip-card-back .back-desc {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #a8a7c7;
     line-height: 1.7;
     font-weight: 300;
@@ -594,7 +595,7 @@ section {
 }
 
 .flip-card-back .back-hint {
-    font-size: 0.65rem;
+    font-size: 0.78rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -734,7 +735,7 @@ img.project-image {
 }
 
 .project-status {
-    font-size: 0.65rem;
+    font-size: 0.78rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
@@ -745,7 +746,7 @@ img.project-image {
 }
 
 .project-name {
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.3em;
@@ -755,7 +756,7 @@ img.project-image {
 }
 
 .project-desc {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #a8a7c7;
     line-height: 1.7;
     font-weight: 300;
@@ -832,7 +833,7 @@ img.project-image {
 }
 
 .experience-role {
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     color: #a8a7c7;
     font-weight: 300;
     font-family: 'Outfit', sans-serif;
@@ -852,7 +853,7 @@ img.project-image {
 }
 
 .experience-bullets li {
-    font-size: 0.88rem;
+    font-size: 1rem;
     color: #a8a7c7;
     line-height: 1.7;
     font-weight: 300;
@@ -913,7 +914,7 @@ img.project-image {
 .github-link {
     display: inline-block;
     margin-top: 1.2rem;
-    font-size: 0.80rem;
+    font-size: 0.82rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
@@ -972,7 +973,7 @@ img.project-image {
 }
 
 .form-label {
-    font-size: 0.72rem;
+    font-size: 0.88rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #6dd5fa;
@@ -1052,7 +1053,7 @@ img.project-image {
 }
 
 .chip-label {
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.3em;
@@ -1072,7 +1073,7 @@ footer {
 }
 
 .footer-text {
-    font-size: 0.75rem;
+    font-size: 0.80rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
@@ -1107,10 +1108,14 @@ footer {
         padding: 2.5rem 3rem;
     }
 
+    .hero-name, .section-title { font-size: clamp(2.8rem, 7vw, 5rem); }
+
     .hero-tagline { font-size: 1.17rem; }
-    .section-eyebrow, .hero-eyebrow { font-size: 0.90rem; }
+    .section-eyebrow, .hero-eyebrow { font-size: 0.92rem; }
     .credential-title { font-size: 1.05rem; }
-    .project-desc { font-size: 1rem; }
+    .project-desc { font-size: 1.05rem; }
+    .flip-card-back .back-desc { font-size: 1.05rem; }
+    .experience-bullets li { font-size: 1.05rem; }
     .skill-name, .project-name { font-size: 0.85rem; }
 
     /* Force 2×2 grid — prevents uneven 3-then-1 layout */
@@ -1204,7 +1209,7 @@ footer {
     }
 
     .hero-name, .section-title {
-        font-size: clamp(1.8rem, 8vw, 2.8rem);
+        font-size: clamp(1.9rem, 8vw, 2.8rem);
     }
 
     .hero-tagline { font-size: 1rem; }
