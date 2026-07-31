@@ -300,13 +300,18 @@ section {
        small ~5px safety buffer for sub-pixel rendering variance — just
        enough to guarantee N rows fit without sacrificing a row that
        genuinely does fit. */
-    @container (max-height: 1333px) {
+    /* #about's .section-bg-logos also carries padding-bottom: 2rem (~36px).
+       @container size queries evaluate against the content box (border box
+       minus padding), while actual visual clipping happens at the border
+       box (the overflow:hidden edge) — so about's thresholds are shifted
+       down by that padding amount relative to the raw row-footprint math. */
+    @container (max-height: 1297px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
     }
-    @container (max-height: 987px) {
+    @container (max-height: 956px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
     }
-    @container (max-height: 651px) {
+    @container (max-height: 615px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
     }
 
@@ -323,6 +328,11 @@ section {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
     }
 
+    /* #skills .section-bg-logos also carries padding-bottom: 3rem (~54px),
+       same content-box-vs-border-box offset as #about above. */
+    @container (max-height: 967px) {
+        #skills .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
+    }
     @container (max-height: 784px) {
         #skills .section-bg-logos .bg-scroll-track:nth-child(n+3),
         #projects .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
