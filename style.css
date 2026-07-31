@@ -230,6 +230,9 @@ section {
 .section-bg-logos {
     position: absolute;
     inset: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
@@ -237,7 +240,7 @@ section {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 2.5rem;
+    gap: 1.5rem;
     container-type: size;
     mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
@@ -287,6 +290,11 @@ section {
     filter: none;
     height: clamp(150px, 20vw, 280px);
     width: clamp(150px, 20vw, 280px);
+    margin-top: 0.8rem;
+}
+
+#about .section-bg-logos {
+    padding-bottom: 2rem;
 }
 .bg-cpp { filter: brightness(1.3) saturate(0.9); }
 .bg-autocad { filter: brightness(0) invert(1); }
