@@ -266,6 +266,29 @@ section {
 
 /* Pure black logos — invert to white */
 .bg-mcmaster { filter: brightness(0) invert(1); }
+
+#about .section-bg-logos {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    mask-image: none;
+    -webkit-mask-image: none;
+    animation: none;
+}
+
+.bg-mcmaster-hero {
+    width: clamp(400px, 70vw, 900px);
+    height: auto;
+    object-fit: contain;
+    opacity: 0.06;
+    filter: brightness(0) invert(1);
+    animation: none !important;
+}
 .bg-cpp { filter: brightness(0) invert(1); }
 .bg-autocad { filter: brightness(0) invert(1); }
 
