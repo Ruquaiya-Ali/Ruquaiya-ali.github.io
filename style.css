@@ -1144,6 +1144,22 @@ img.project-image,
     gap: 0.5rem;
 }
 
+/* Reserve exactly 2 tag rows on the front of every project card, regardless
+   of how many tags a given project has — so both cards' name/tags/hint
+   occupy identical vertical space and stay proportionally aligned instead
+   of drifting based on tag count. Scoped to .flip-card-front so it doesn't
+   affect .project-tags reused elsewhere (e.g. experience cards). */
+.flip-card-front .project-tags .tag {
+    line-height: 1.4;
+}
+
+.flip-card-front .project-tags {
+    min-height: calc(2 * (0.8rem * 1.4 + 0.6rem + 2px) + 0.5rem + 2px);
+    max-height: calc(2 * (0.8rem * 1.4 + 0.6rem + 2px) + 0.5rem + 2px);
+    overflow: hidden;
+    align-content: flex-start;
+}
+
 /* EXPERIENCE */
 #experience {
     position: relative;
@@ -1601,21 +1617,6 @@ footer {
 
     .experience-date {
         white-space: normal;
-    }
-
-    /* Flip cards: shorter on mobile since cards are stacked (equal height not needed) */
-    .flip-card,
-    .flip-card-inner,
-    .flip-card-front,
-    .flip-card-back {
-        height: 480px;
-        min-height: 480px;
-    }
-
-    /* Reduce video height on mobile so name/tags/hint all stay visible */
-    img.project-image,
-    .flip-card-front video {
-        height: 160px;
     }
 
     /* Back face: compact layout so all content fits without scrolling */
