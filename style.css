@@ -262,6 +262,13 @@ section {
     visibility: visible;
 }
 
+/* Alternate scroll direction row-to-row across every section, so consecutive
+   rows always scroll oppositely. Speed/duration is untouched — this only
+   flips direction via the existing bg-scroll keyframe. */
+.section-bg-logos .bg-scroll-track:nth-child(even) {
+    animation-direction: reverse;
+}
+
 @container (max-height: 800px) {
     .section-bg-logos .bg-scroll-track:nth-child(n+6) { display: none; }
 }
@@ -290,28 +297,29 @@ section {
 @media (min-width: 1024px) {
     /* Thresholds computed from measured max row footprint (logo height + row
        gap, at the widths where each clamp() reaches its ceiling) plus a
-       ~40px safety buffer, so a tier only shows N rows once N rows are
-       guaranteed to fit. */
-    @container (max-height: 1368px) {
+       small ~5px safety buffer for sub-pixel rendering variance — just
+       enough to guarantee N rows fit without sacrificing a row that
+       genuinely does fit. */
+    @container (max-height: 1333px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
     }
-    @container (max-height: 1027px) {
+    @container (max-height: 987px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
     }
-    @container (max-height: 686px) {
+    @container (max-height: 651px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
     }
 
-    @container (max-height: 1484px) {
+    @container (max-height: 1449px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+5) { display: none; }
     }
-    @container (max-height: 1188px) {
+    @container (max-height: 1153px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
     }
-    @container (max-height: 892px) {
+    @container (max-height: 857px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
     }
-    @container (max-height: 596px) {
+    @container (max-height: 561px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
     }
 
@@ -1264,6 +1272,7 @@ img.project-image,
 
 #contact .section-bg-logos .bg-scroll-track:nth-child(even) {
     margin-left: calc(clamp(140px, 16vw, 220px) / 2 + 3rem);
+    animation-direction: reverse;
 }
 
 .contact-inner {
