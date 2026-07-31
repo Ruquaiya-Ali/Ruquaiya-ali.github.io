@@ -290,7 +290,7 @@ section {
     filter: none;
     height: clamp(150px, 20vw, 280px);
     width: clamp(150px, 20vw, 280px);
-    margin-top: 0.8rem;
+    margin-top: 2.5rem;
 }
 
 #about .section-bg-logos {
@@ -1088,15 +1088,19 @@ img.project-image,
 .experience-footer {
     display: flex;
     justify-content: flex-end;
-    margin-top: 1.5rem;
+    align-items: flex-end;
+    margin-top: auto;
+    padding-top: 0.8rem;
 }
 
 .experience-item .project-tags {
     margin-top: 0.8rem !important;
+    flex-shrink: 0;
 }
 
 .experience-item .experience-footer {
-    margin-top: 0.8rem;
+    margin-top: auto;
+    flex-shrink: 0;
 }
 
 .company-logo {
