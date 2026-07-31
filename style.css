@@ -269,6 +269,21 @@ section {
     animation-direction: reverse;
 }
 
+/* #experience, #skills and #contact run the opposite phase (odd=reverse,
+   even=normal) so the row at their boundary with the adjacent section
+   scrolls opposite to that neighboring section's boundary row, instead of
+   both defaulting to "normal" and moving the same way. */
+#experience .section-bg-logos .bg-scroll-track:nth-child(odd),
+#skills .section-bg-logos .bg-scroll-track:nth-child(odd),
+#contact .section-bg-logos .bg-scroll-track:nth-child(odd) {
+    animation-direction: reverse;
+}
+#experience .section-bg-logos .bg-scroll-track:nth-child(even),
+#skills .section-bg-logos .bg-scroll-track:nth-child(even),
+#contact .section-bg-logos .bg-scroll-track:nth-child(even) {
+    animation-direction: normal;
+}
+
 @container (max-height: 800px) {
     .section-bg-logos .bg-scroll-track:nth-child(n+6) { display: none; }
 }
@@ -1282,7 +1297,6 @@ img.project-image,
 
 #contact .section-bg-logos .bg-scroll-track:nth-child(even) {
     margin-left: calc(clamp(140px, 16vw, 220px) / 2 + 3rem);
-    animation-direction: reverse;
 }
 
 .contact-inner {
