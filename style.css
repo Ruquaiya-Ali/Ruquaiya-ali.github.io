@@ -315,6 +315,21 @@ section {
     font-weight: 300;
 }
 
+.github-link {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-size: 0.92rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+    font-family: 'Outfit', sans-serif;
+}
+
+.github-link:hover { color: #6dd5fa; }
+
 .hero-eyebrow {
     font-size: 0.88rem;
     letter-spacing: 0.3em;
