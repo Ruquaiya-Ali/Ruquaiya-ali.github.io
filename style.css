@@ -1235,22 +1235,6 @@ footer {
 
 /* Large desktop */
 @media (min-width: 1024px) {
-    nav { padding: 0 4rem; }
-    #about { padding: 6rem 6rem 3rem; }
-    #skills, #projects, #contact { padding: 3rem 6rem; }
-    #experience { padding: 3rem 6rem; }
-
-    .hero-inner,
-    .skills-wrap,
-    .projects-wrap,
-    .contact-wrap { max-width: 1200px; }
-
-    .experience-wrap { max-width: 1200px; }
-
-    .experience-item {
-        padding: 2.5rem 3rem;
-    }
-
     .hero-name, .section-title { font-size: clamp(2.8rem, 7vw, 5rem); }
 
     .hero-tagline { font-size: 1.17rem; }
@@ -1264,6 +1248,20 @@ footer {
 
     /* Force 2×2 grid — prevents uneven 3-then-1 layout */
     .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1440px) {
+    .skills-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-inner {
+        grid-template-columns: 1.4fr 1fr;
+    }
 }
 
 /* Tablet */
@@ -1337,7 +1335,6 @@ footer {
 
     /* About */
     #about {
-        padding: calc(var(--nav-h) + 3rem) 1.5rem 2rem;
         align-items: flex-start;
         overflow: hidden;
     }
@@ -1360,13 +1357,17 @@ footer {
 
 
     /* Sections */
-    #skills, #projects, #contact { padding: 2.5rem 1.5rem; }
+    #about, #skills, #projects, #experience, #personal, #contact {
+        padding: 2.5rem 1.5rem;
+    }
+
+    #about {
+        padding-top: calc(var(--nav-h) + 2.5rem);
+    }
 
     .skills-grid { grid-template-columns: 1fr; }
 
     .projects-grid { grid-template-columns: 1fr; }
-
-    #experience { padding: 2.5rem 1.5rem; }
 
     .experience-item {
         padding: 1.5rem;
@@ -1382,10 +1383,10 @@ footer {
     }
 
     /* Flip cards: shorter on mobile since cards are stacked (equal height not needed) */
-    .flip-card          { height: 483px !important; }
-    .flip-card-inner    { height: 483px !important; }
-    .flip-card-front    { height: 483px !important; }
-    .flip-card-back     { height: 483px !important; }
+    .flip-card,
+    .flip-card-inner,
+    .flip-card-front,
+    .flip-card-back { min-height: 280px; }
 
     /* Reduce video height on mobile so name/tags/hint all stay visible */
     #projects .flip-card-front .project-image { height: 160px !important; }
