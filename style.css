@@ -970,9 +970,10 @@ img.project-image,
 }
 
 .experience-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(300px, 40vw, 560px), 1fr));
+    gap: clamp(1.5rem, 2.5vw, 2.5rem);
+    align-items: start;
     width: 100%;
 }
 
@@ -1258,6 +1259,8 @@ footer {
 
 /* Large desktop */
 @media (min-width: 1024px) {
+    .experience-grid { grid-template-columns: repeat(2, 1fr); }
+
     .hero-name, .section-title { font-size: clamp(2.8rem, 7vw, 5rem); }
 
     .hero-tagline { font-size: 1.17rem; }
@@ -1391,6 +1394,8 @@ footer {
     .skills-grid { grid-template-columns: 1fr; }
 
     .projects-grid { grid-template-columns: 1fr; }
+
+    .experience-grid { grid-template-columns: 1fr; }
 
     .experience-item {
         padding: 1.5rem;
