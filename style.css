@@ -282,6 +282,41 @@ section {
     .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
 }
 
+/* #about and #experience use much larger logos (up to 280px/260px) than the
+   generic thresholds above assume, so they need their own, more aggressive
+   tiers to avoid visible cropping. Scoped to >=1024px width because at
+   narrower viewports the logos shrink via clamp() and the generic tiers
+   already prevent cropping there. */
+@media (min-width: 1024px) {
+    @container (max-height: 1200px) {
+        #about .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
+    }
+    @container (max-height: 900px) {
+        #about .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
+    }
+    @container (max-height: 600px) {
+        #about .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
+    }
+
+    @container (max-height: 1300px) {
+        #experience .section-bg-logos .bg-scroll-track:nth-child(n+5) { display: none; }
+    }
+    @container (max-height: 1000px) {
+        #experience .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
+    }
+    @container (max-height: 750px) {
+        #experience .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
+    }
+    @container (max-height: 500px) {
+        #experience .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
+    }
+
+    @container (max-height: 650px) {
+        #skills .section-bg-logos .bg-scroll-track:nth-child(n+3),
+        #projects .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
+    }
+}
+
 .bg-logo {
     height: clamp(80px, 10vw, 160px);
     width: clamp(80px, 10vw, 160px);
@@ -1194,13 +1229,13 @@ img.project-image,
 .company-logo {
     height: 36px;
     width: auto;
-    opacity: 0.6;
+    opacity: 0.85;
     filter: brightness(0) invert(1);
     transition: opacity 0.2s;
 }
 
 .experience-item:hover .company-logo {
-    opacity: 0.9;
+    opacity: 1;
 }
 
 /* CONTACT */
