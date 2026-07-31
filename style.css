@@ -337,6 +337,82 @@ section {
     width: clamp(140px, 16vw, 220px);
 }
 
+/* On small phones reduce logo size so more rows fit */
+@media (max-width: 480px) {
+    .bg-logo {
+        height: clamp(60px, 15vw, 100px);
+        width: clamp(60px, 15vw, 100px);
+    }
+
+    .bg-mcmaster {
+        height: clamp(80px, 18vw, 120px);
+        width: clamp(80px, 18vw, 120px);
+    }
+
+    .bg-telus, .bg-siemens {
+        height: clamp(80px, 18vw, 120px);
+        width: clamp(80px, 18vw, 120px);
+    }
+
+    .bg-linkedin, .bg-github {
+        height: clamp(80px, 15vw, 120px);
+        width: clamp(80px, 15vw, 120px);
+    }
+
+    .section-bg-logos {
+        gap: 1rem;
+    }
+
+    #skills .section-bg-logos,
+    #projects .section-bg-logos {
+        gap: 2rem;
+    }
+}
+
+/* On tablets reduce gap slightly */
+@media (max-width: 1024px) and (min-width: 481px) {
+    .bg-logo {
+        height: clamp(80px, 12vw, 160px);
+        width: clamp(80px, 12vw, 160px);
+    }
+
+    .section-bg-logos {
+        gap: 1.5rem;
+    }
+
+    #skills .section-bg-logos,
+    #projects .section-bg-logos {
+        gap: 3rem;
+    }
+}
+
+/* On large desktops make sure rows fill the full section */
+@media (min-width: 1440px) {
+    .bg-logo {
+        height: clamp(140px, 12vw, 200px);
+        width: clamp(140px, 12vw, 200px);
+    }
+
+    .bg-mcmaster {
+        height: clamp(180px, 16vw, 260px);
+        width: clamp(180px, 16vw, 260px);
+    }
+
+    .bg-telus {
+        height: clamp(180px, 16vw, 260px);
+        width: clamp(180px, 16vw, 260px);
+    }
+
+    .section-bg-logos {
+        gap: 2rem;
+    }
+
+    #skills .section-bg-logos,
+    #projects .section-bg-logos {
+        gap: 5rem;
+    }
+}
+
 /* Make sure all section content sits above bg logos */
 #about .hero-inner,
 #skills .skills-wrap,
