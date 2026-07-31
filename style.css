@@ -733,6 +733,8 @@ section {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
+    padding: 2rem;
+    justify-content: flex-start;
     overflow: hidden;
 }
 
