@@ -352,7 +352,7 @@ section {
 
 .resume-thumb {
     width: 120px;
-    height: 80px;
+    height: 50px;
     object-fit: cover;
     object-position: top;
     border-radius: 4px;
@@ -1156,7 +1156,7 @@ footer {
     .hero-tagline { font-size: 1.17rem; }
     .section-eyebrow, .hero-eyebrow { font-size: 0.92rem; }
     .credential-title { font-size: 1.05rem; }
-    .resume-thumb { width: 140px; height: 90px; }
+    .resume-thumb { width: 140px; height: 60px; }
     .project-desc { font-size: 1.05rem; }
     .flip-card-back .back-desc { font-size: 1.05rem; }
     .experience-bullets li { font-size: 1.05rem; }
