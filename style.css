@@ -262,12 +262,24 @@ section {
     visibility: visible;
 }
 
-@container (max-height: 300px) {
-    .bg-scroll-track:nth-child(n+3) { display: none; }
+@container (max-height: 800px) {
+    .section-bg-logos .bg-scroll-track:nth-child(n+6) { display: none; }
+}
+
+@container (max-height: 650px) {
+    .section-bg-logos .bg-scroll-track:nth-child(n+5) { display: none; }
+}
+
+@container (max-height: 500px) {
+    .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
+}
+
+@container (max-height: 350px) {
+    .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
 }
 
 @container (max-height: 200px) {
-    .bg-scroll-track:nth-child(n+2) { display: none; }
+    .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
 }
 
 .bg-logo {
