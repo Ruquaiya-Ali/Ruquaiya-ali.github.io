@@ -292,26 +292,26 @@ section {
        gap, at the widths where each clamp() reaches its ceiling) plus a
        ~40px safety buffer, so a tier only shows N rows once N rows are
        guaranteed to fit. */
-    @container (max-height: 1027px) {
+    @container (max-height: 1368px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
     }
-    @container (max-height: 686px) {
+    @container (max-height: 1027px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
     }
-    @container (max-height: 345px) {
+    @container (max-height: 686px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
     }
 
-    @container (max-height: 1188px) {
+    @container (max-height: 1484px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+5) { display: none; }
     }
-    @container (max-height: 892px) {
+    @container (max-height: 1188px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
     }
-    @container (max-height: 596px) {
+    @container (max-height: 892px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
     }
-    @container (max-height: 300px) {
+    @container (max-height: 596px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
     }
 
