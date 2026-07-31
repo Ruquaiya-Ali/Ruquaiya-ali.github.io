@@ -227,6 +227,51 @@ section {
     scroll-margin-top: var(--nav-h);
 }
 
+.section-bg-logos {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.bg-scroll-track {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    width: max-content;
+    height: 100%;
+    animation: bg-scroll 30s linear infinite;
+}
+
+.bg-logo {
+    height: 60px;
+    width: auto;
+    opacity: 0.07;
+    filter: brightness(0) invert(1);
+    flex-shrink: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+@keyframes bg-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Make sure all section content sits above bg logos */
+#about .hero-inner,
+#skills .skills-wrap,
+#experience .experience-wrap {
+    position: relative;
+    z-index: 1;
+}
+
 /* ABOUT */
 #about {
     position: relative;
@@ -235,6 +280,7 @@ section {
     align-items: flex-start;
     justify-content: center;
     padding: 6rem 4rem 3rem;
+    overflow: hidden;
 }
 
 .hero-inner {
@@ -455,6 +501,7 @@ section {
     padding: 3rem 4rem;
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 
 .skills-wrap {
@@ -857,6 +904,7 @@ img.project-image {
     padding: 3rem 4rem;
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 
 .experience-wrap {
