@@ -333,6 +333,11 @@ section {
     z-index: 1;
 }
 
+#skills .section-bg-logos,
+#projects .section-bg-logos {
+    gap: 4rem;
+}
+
 #projects .projects-wrap {
     position: relative;
     z-index: 1;
@@ -1114,6 +1119,10 @@ img.project-image,
 #contact .contact-wrap {
     position: relative;
     z-index: 1;
+}
+
+#contact .section-bg-logos .bg-scroll-track:nth-child(even) {
+    transform: translateX(calc(clamp(100px, 12vw, 180px) / 2 + 3rem));
 }
 
 .contact-inner {
