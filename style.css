@@ -288,30 +288,34 @@ section {
    narrower viewports the logos shrink via clamp() and the generic tiers
    already prevent cropping there. */
 @media (min-width: 1024px) {
-    @container (max-height: 1200px) {
+    /* Thresholds computed from measured max row footprint (logo height + row
+       gap, at the widths where each clamp() reaches its ceiling) plus a
+       ~40px safety buffer, so a tier only shows N rows once N rows are
+       guaranteed to fit. */
+    @container (max-height: 1027px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
     }
-    @container (max-height: 900px) {
+    @container (max-height: 686px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
     }
-    @container (max-height: 600px) {
+    @container (max-height: 345px) {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
     }
 
-    @container (max-height: 1300px) {
+    @container (max-height: 1188px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+5) { display: none; }
     }
-    @container (max-height: 1000px) {
+    @container (max-height: 892px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
     }
-    @container (max-height: 750px) {
+    @container (max-height: 596px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
     }
-    @container (max-height: 500px) {
+    @container (max-height: 300px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
     }
 
-    @container (max-height: 650px) {
+    @container (max-height: 784px) {
         #skills .section-bg-logos .bg-scroll-track:nth-child(n+3),
         #projects .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
     }
@@ -459,6 +463,12 @@ section {
 #skills .section-bg-logos,
 #projects .section-bg-logos {
     gap: 4rem;
+    padding-bottom: 3rem;
+}
+
+#contact .section-bg-logos {
+    padding-top: 3rem;
+    justify-content: space-evenly;
 }
 
 #projects .projects-wrap {
