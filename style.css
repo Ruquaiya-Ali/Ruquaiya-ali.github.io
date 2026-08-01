@@ -867,6 +867,15 @@ section {
     line-height: 1.4;
     display: inline-flex;
     align-items: center;
+    height: auto;
+}
+
+.experience-item .tag {
+    font-size: 0.75rem !important;
+    padding: 0.3rem 0.7rem !important;
+    line-height: 1.4 !important;
+    height: auto !important;
+    min-height: unset !important;
 }
 
 /* FLIP CARDS */
