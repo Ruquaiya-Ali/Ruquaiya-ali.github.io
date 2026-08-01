@@ -1623,6 +1623,11 @@ footer {
 
     .experience-grid { grid-template-columns: 1fr; }
 
+    .experience-grid .experience-item:nth-child(3) {
+        grid-column: 1;
+        max-width: 100%;
+    }
+
     .experience-item {
         padding: 1.5rem;
     }
