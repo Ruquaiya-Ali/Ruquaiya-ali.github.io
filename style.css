@@ -858,12 +858,15 @@ section {
 }
 
 .tag {
-    font-size: 0.80rem;
+    font-size: 0.75rem;
     padding: 0.3rem 0.7rem;
     background: rgba(139, 92, 246, 0.1);
     border: 1px solid rgba(139, 92, 246, 0.2);
     border-radius: 20px;
     color: #c4b5fd;
+    line-height: 1.4;
+    display: inline-flex;
+    align-items: center;
 }
 
 /* FLIP CARDS */
@@ -1333,8 +1336,8 @@ img.project-image,
 }
 
 .brand-logo {
-    height: 22px;
-    width: 22px;
+    height: 36px;
+    width: 36px;
     object-fit: contain;
     filter: brightness(0) invert(1);
     mix-blend-mode: screen;
