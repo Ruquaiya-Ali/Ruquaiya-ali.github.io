@@ -398,6 +398,14 @@ section {
     width: clamp(150px, 18vw, 260px);
 }
 
+.bg-skrypt {
+    /* bg-skrypt.png is a filled icon (dark teal background + white mark),
+       not a transparent-background line-art logo like Siemens/TELUS — the
+       brightness(0) invert(1) treatment used for those crushes it to a
+       blank white blob, so it's intentionally left unfiltered here. */
+    filter: none;
+}
+
 .bg-siemens {
     height: 240px;
     width: 240px;
@@ -1304,6 +1312,14 @@ img.project-image,
 
 .experience-item:hover .company-logo {
     opacity: 1;
+}
+
+/* bg-skrypt.png is a filled icon (own dark background + white mark), not
+   transparent line-art like the Siemens/TELUS logos — the shared
+   brightness(0) invert(1) treatment above crushes it to a blank shape, so
+   it's excluded here without touching the other company logos. */
+.company-logo[src*="bg-skrypt"] {
+    filter: none;
 }
 
 /* CONTACT */
