@@ -1300,6 +1300,13 @@ img.project-image,
 .experience-item .project-tags {
     margin-top: 0.8rem !important;
     flex-shrink: 0;
+    /* Reserve space for 2 tag rows (the max seen across breakpoints) so
+       cards with shorter tag labels (e.g. Skrypt, 1 row) don't let their
+       bottom-anchored footer pull the tags block to a different vertical
+       position than cards whose longer labels wrap to 2 rows (e.g.
+       Siemens). min-height only — never clipped, unlike the flip-card tag
+       reservation, since there's no back face here to reveal hidden tags. */
+    min-height: calc(2 * (0.8rem * 1.4 + 0.6rem + 2px) + 0.5rem + 2px);
 }
 
 .experience-item .experience-footer {
@@ -1319,15 +1326,30 @@ img.project-image,
     opacity: 1;
 }
 
-/* bg-skrypt.png is a filled icon (dark teal background + white mark), not
-   transparent line-art like Siemens/TELUS. brightness(0) invert(1) turns
-   the mark white to match the other company logos; mix-blend-mode:screen
-   lets the icon's white background blend into the dark card instead of
-   showing as a solid box. */
-.experience-item .company-logo.bg-skrypt {
+.company-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.brand-logo {
+    height: 22px;
+    width: 22px;
+    object-fit: contain;
     filter: brightness(0) invert(1);
     mix-blend-mode: screen;
     opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.company-brand-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.08em;
+    text-transform: none;
+    white-space: nowrap;
 }
 
 /* CONTACT */
