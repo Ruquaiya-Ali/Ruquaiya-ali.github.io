@@ -1284,29 +1284,42 @@ img.project-image,
 
 .experience-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 0;
     margin-bottom: 1.4rem;
-    flex-wrap: wrap;
 }
 
 .experience-meta {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.25rem;
+    width: 100%;
 }
 
 .experience-role {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     color: #e0dff5;
     font-weight: 400;
     font-family: 'Outfit', sans-serif;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
 }
 
 .experience-date {
-    white-space: nowrap;
-    flex-shrink: 0;
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #6dd5fa;
+    opacity: 0.7;
+    font-family: 'Outfit', sans-serif;
+    white-space: normal;
+    text-align: left;
+}
+
+.experience-meta .project-name {
+    white-space: normal;
+    word-break: break-word;
 }
 
 .experience-bullets {
@@ -1664,6 +1677,18 @@ footer {
     }
 }
 
+@media (max-width: 900px) {
+    .experience-header {
+        flex-wrap: wrap;
+    }
+
+    .experience-date {
+        width: 100%;
+        text-align: left;
+        white-space: normal;
+    }
+}
+
 /* Mobile */
 @media (max-width: 767px) {
     /* Nav */
@@ -1755,12 +1780,16 @@ footer {
     }
 
     .experience-header {
+        flex-wrap: wrap;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
 
     .experience-date {
         white-space: normal;
+        text-align: left;
+        margin-left: 0;
+        align-self: flex-start;
     }
 
     .flip-card,
