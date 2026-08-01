@@ -1319,6 +1319,10 @@ img.project-image,
        Siemens). min-height only — never clipped, unlike the flip-card tag
        reservation, since there's no back face here to reveal hidden tags. */
     min-height: calc(2 * (0.8rem * 1.4 + 0.6rem + 2px) + 0.5rem + 2px);
+    /* Without this, the default align-content:normal stretches a single
+       row of tags to fill the whole reserved 2-row box, making each pill
+       look like a tall rounded rectangle instead of a compact pill. */
+    align-content: flex-start;
 }
 
 .experience-item .experience-footer {
