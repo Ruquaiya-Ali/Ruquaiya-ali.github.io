@@ -406,6 +406,11 @@ section {
     filter: none;
 }
 
+.section-bg-logos .bg-skrypt {
+    height: clamp(60px, 8vw, 110px);
+    width: clamp(60px, 8vw, 110px);
+}
+
 .bg-siemens {
     height: 240px;
     width: 240px;
@@ -1314,12 +1319,15 @@ img.project-image,
     opacity: 1;
 }
 
-/* bg-skrypt.png is a filled icon (own dark background + white mark), not
-   transparent line-art like the Siemens/TELUS logos — the shared
-   brightness(0) invert(1) treatment above crushes it to a blank shape, so
-   it's excluded here without touching the other company logos. */
-.company-logo[src*="bg-skrypt"] {
-    filter: none;
+/* bg-skrypt.png is a filled icon (dark teal background + white mark), not
+   transparent line-art like Siemens/TELUS. brightness(0) invert(1) turns
+   the mark white to match the other company logos; mix-blend-mode:screen
+   lets the icon's white background blend into the dark card instead of
+   showing as a solid box. */
+.experience-item .company-logo.bg-skrypt {
+    filter: brightness(0) invert(1);
+    mix-blend-mode: screen;
+    opacity: 0.7;
 }
 
 /* CONTACT */
