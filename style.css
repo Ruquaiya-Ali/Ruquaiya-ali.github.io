@@ -262,27 +262,30 @@ section {
     visibility: visible;
 }
 
-/* Alternate scroll direction row-to-row across every section, so consecutive
-   rows always scroll oppositely. Speed/duration is untouched — this only
-   flips direction via the existing bg-scroll keyframe. */
-.section-bg-logos .bg-scroll-track:nth-child(even) {
-    animation-direction: reverse;
-}
+/* Explicit per-section animation-name assignment (rather than toggling
+   animation-direction) drives alternation everywhere. Each section's
+   odd/even phase is picked so its first row scrolls opposite to the
+   previous section's last row and its last row scrolls opposite to the
+   next section's first row, in the common case where all rows in both
+   sections are visible. NOTE: sections hide trailing rows at short
+   container heights (see the @container tiers below), so the row actually
+   adjacent to a section boundary can shift with viewport height — perfect
+   alternation at every possible height isn't achievable with a static
+   odd/even rule, only for the nominal/common case. */
+#about .section-bg-logos .bg-scroll-track:nth-child(odd) { animation-name: bg-scroll; }
+#about .section-bg-logos .bg-scroll-track:nth-child(even) { animation-name: bg-scroll-reverse; }
 
-/* #experience, #skills and #contact run the opposite phase (odd=reverse,
-   even=normal) so the row at their boundary with the adjacent section
-   scrolls opposite to that neighboring section's boundary row, instead of
-   both defaulting to "normal" and moving the same way. */
-#experience .section-bg-logos .bg-scroll-track:nth-child(odd),
-#skills .section-bg-logos .bg-scroll-track:nth-child(odd),
-#contact .section-bg-logos .bg-scroll-track:nth-child(odd) {
-    animation-direction: reverse;
-}
-#experience .section-bg-logos .bg-scroll-track:nth-child(even),
-#skills .section-bg-logos .bg-scroll-track:nth-child(even),
-#contact .section-bg-logos .bg-scroll-track:nth-child(even) {
-    animation-direction: normal;
-}
+#experience .section-bg-logos .bg-scroll-track:nth-child(odd) { animation-name: bg-scroll-reverse; }
+#experience .section-bg-logos .bg-scroll-track:nth-child(even) { animation-name: bg-scroll; }
+
+#projects .section-bg-logos .bg-scroll-track:nth-child(odd) { animation-name: bg-scroll-reverse; }
+#projects .section-bg-logos .bg-scroll-track:nth-child(even) { animation-name: bg-scroll; }
+
+#skills .section-bg-logos .bg-scroll-track:nth-child(odd) { animation-name: bg-scroll; }
+#skills .section-bg-logos .bg-scroll-track:nth-child(even) { animation-name: bg-scroll-reverse; }
+
+#contact .section-bg-logos .bg-scroll-track:nth-child(odd) { animation-name: bg-scroll; }
+#contact .section-bg-logos .bg-scroll-track:nth-child(even) { animation-name: bg-scroll-reverse; }
 
 @container (max-height: 900px) {
     .section-bg-logos .bg-scroll-track:nth-child(n+7) { display: none; }
@@ -396,23 +399,6 @@ section {
 @keyframes bg-scroll-reverse {
     from { transform: translateX(-50%); }
     to { transform: translateX(0); }
-}
-
-/* #skills/#projects rows already carry animation-direction overrides from
-   elsewhere (a cross-section phase-flip on #skills, and the global
-   nth-child(even) rule on #projects) — without resetting direction to
-   normal here, those would combine with the reversed keyframe and cancel
-   out, leaving every row moving the same way instead of alternating. */
-#skills .section-bg-logos .bg-scroll-track:nth-child(even),
-#projects .section-bg-logos .bg-scroll-track:nth-child(even) {
-    animation-name: bg-scroll-reverse;
-    animation-direction: normal;
-}
-
-#skills .section-bg-logos .bg-scroll-track:nth-child(odd),
-#projects .section-bg-logos .bg-scroll-track:nth-child(odd) {
-    animation-name: bg-scroll;
-    animation-direction: normal;
 }
 
 /* Pure black logos — invert to white */
