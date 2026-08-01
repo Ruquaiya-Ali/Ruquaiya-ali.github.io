@@ -1172,9 +1172,17 @@ img.project-image,
 
 .experience-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(300px, 40vw, 560px), 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
     gap: clamp(1.5rem, 2.5vw, 2.5rem);
     align-items: stretch;
+    width: 100%;
+}
+
+.experience-grid .experience-item:nth-child(3) {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin: 0 auto;
     width: 100%;
 }
 
