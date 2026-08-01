@@ -393,6 +393,28 @@ section {
     100% { transform: translateX(-50%); }
 }
 
+@keyframes bg-scroll-reverse {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+
+/* #skills/#projects rows already carry animation-direction overrides from
+   elsewhere (a cross-section phase-flip on #skills, and the global
+   nth-child(even) rule on #projects) — without resetting direction to
+   normal here, those would combine with the reversed keyframe and cancel
+   out, leaving every row moving the same way instead of alternating. */
+#skills .section-bg-logos .bg-scroll-track:nth-child(even),
+#projects .section-bg-logos .bg-scroll-track:nth-child(even) {
+    animation-name: bg-scroll-reverse;
+    animation-direction: normal;
+}
+
+#skills .section-bg-logos .bg-scroll-track:nth-child(odd),
+#projects .section-bg-logos .bg-scroll-track:nth-child(odd) {
+    animation-name: bg-scroll;
+    animation-direction: normal;
+}
+
 /* Pure black logos — invert to white */
 .bg-mcmaster {
     filter: none;
