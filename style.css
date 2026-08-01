@@ -238,7 +238,7 @@ section {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     align-items: flex-start;
     gap: 1.5rem;
     container-type: size;
@@ -254,7 +254,7 @@ section {
     animation: bg-scroll 60s linear infinite;
     will-change: transform;
     flex-shrink: 0;
-    min-width: 0;
+    min-width: 100%;
     overflow: visible;
 }
 
@@ -284,32 +284,37 @@ section {
     animation-direction: normal;
 }
 
-@container (max-height: 800px) {
+@container (max-height: 900px) {
+    .section-bg-logos .bg-scroll-track:nth-child(n+7) { display: none; }
+}
+
+@container (max-height: 750px) {
     .section-bg-logos .bg-scroll-track:nth-child(n+6) { display: none; }
 }
 
-@container (max-height: 650px) {
+@container (max-height: 600px) {
     .section-bg-logos .bg-scroll-track:nth-child(n+5) { display: none; }
 }
 
-@container (max-height: 500px) {
+@container (max-height: 450px) {
     .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
 }
 
-@container (max-height: 350px) {
+@container (max-height: 300px) {
     .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
 }
 
-@container (max-height: 200px) {
+@container (max-height: 180px) {
     .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
 }
 
 /* #about and #experience use much larger logos (up to 280px/260px) than the
    generic thresholds above assume, so they need their own, more aggressive
-   tiers to avoid visible cropping. Scoped to >=1024px width because at
-   narrower viewports the logos shrink via clamp() and the generic tiers
-   already prevent cropping there. */
-@media (min-width: 1024px) {
+   tiers to avoid visible cropping. Scoped to >=769px width — that's where
+   the tablet media query (max-width:768px) stops shrinking .bg-logo/
+   .bg-mcmaster/.bg-telus, so below it the generic tiers (calibrated for
+   those smaller sizes) are safe on their own. */
+@media (min-width: 769px) {
     /* Thresholds computed from measured max row footprint (logo height + row
        gap, at the widths where each clamp() reaches its ceiling) plus a
        small ~5px safety buffer for sub-pixel rendering variance — just
@@ -330,6 +335,25 @@ section {
         #about .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
     }
 
+    /* #experience now has up to 10 rows (grew from a max of 9 after the
+       Skrypt/GDG additions), and the section itself got much taller once
+       it switched to a 2x2 four-card grid, so heights well above the old
+       ~1450px ceiling are now common — these extra tiers cap rows 6-9. */
+    @container (max-height: 2929px) {
+        #experience .section-bg-logos .bg-scroll-track:nth-child(n+10) { display: none; }
+    }
+    @container (max-height: 2633px) {
+        #experience .section-bg-logos .bg-scroll-track:nth-child(n+9) { display: none; }
+    }
+    @container (max-height: 2337px) {
+        #experience .section-bg-logos .bg-scroll-track:nth-child(n+8) { display: none; }
+    }
+    @container (max-height: 2041px) {
+        #experience .section-bg-logos .bg-scroll-track:nth-child(n+7) { display: none; }
+    }
+    @container (max-height: 1745px) {
+        #experience .section-bg-logos .bg-scroll-track:nth-child(n+6) { display: none; }
+    }
     @container (max-height: 1449px) {
         #experience .section-bg-logos .bg-scroll-track:nth-child(n+5) { display: none; }
     }
@@ -431,23 +455,41 @@ section {
 /* On small phones reduce logo size so more rows fit */
 @media (max-width: 480px) {
     .bg-logo {
-        height: clamp(60px, 15vw, 100px);
-        width: clamp(60px, 15vw, 100px);
+        height: clamp(50px, 12vw, 80px);
+        width: clamp(50px, 12vw, 80px);
     }
 
     .bg-mcmaster {
-        height: clamp(80px, 18vw, 120px);
-        width: clamp(80px, 18vw, 120px);
+        height: clamp(70px, 15vw, 100px);
+        width: clamp(70px, 15vw, 100px);
     }
 
-    .bg-telus, .bg-siemens {
-        height: clamp(80px, 18vw, 120px);
-        width: clamp(80px, 18vw, 120px);
+    .bg-telus, .bg-siemens, .bg-skrypt, .bg-gdg {
+        height: clamp(60px, 12vw, 90px);
+        width: clamp(60px, 12vw, 90px);
     }
 
     .bg-linkedin, .bg-github {
         height: clamp(80px, 15vw, 120px);
         width: clamp(80px, 15vw, 120px);
+    }
+
+    .section-bg-logos {
+        gap: 0.8rem;
+    }
+
+    #skills .section-bg-logos,
+    #projects .section-bg-logos {
+        gap: 1.5rem;
+        padding-top: 1.5rem;
+    }
+}
+
+/* On tablets reduce gap slightly */
+@media (max-width: 768px) and (min-width: 481px) {
+    .bg-logo {
+        height: clamp(70px, 10vw, 120px);
+        width: clamp(70px, 10vw, 120px);
     }
 
     .section-bg-logos {
@@ -457,31 +499,15 @@ section {
     #skills .section-bg-logos,
     #projects .section-bg-logos {
         gap: 2rem;
-    }
-}
-
-/* On tablets reduce gap slightly */
-@media (max-width: 1024px) and (min-width: 481px) {
-    .bg-logo {
-        height: clamp(80px, 12vw, 160px);
-        width: clamp(80px, 12vw, 160px);
-    }
-
-    .section-bg-logos {
-        gap: 1.5rem;
-    }
-
-    #skills .section-bg-logos,
-    #projects .section-bg-logos {
-        gap: 3rem;
+        padding-top: 2rem;
     }
 }
 
 /* On large desktops make sure rows fill the full section */
 @media (min-width: 1440px) {
     .bg-logo {
-        height: clamp(140px, 12vw, 200px);
-        width: clamp(140px, 12vw, 200px);
+        height: clamp(130px, 11vw, 190px);
+        width: clamp(130px, 11vw, 190px);
     }
 
     .bg-mcmaster {
@@ -500,7 +526,8 @@ section {
 
     #skills .section-bg-logos,
     #projects .section-bg-logos {
-        gap: 5rem;
+        gap: 4rem;
+        padding-top: 3rem;
     }
 }
 
@@ -1383,8 +1410,8 @@ img.project-image,
 .bg-gdg.brand-logo {
     filter: grayscale(100%) brightness(3) contrast(0.9);
     opacity: 1;
-    height: 44px;
-    width: 44px;
+    height: 52px;
+    width: 52px;
 }
 
 .company-brand-name {
