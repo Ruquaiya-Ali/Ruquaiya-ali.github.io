@@ -9,6 +9,8 @@
     --border:   #1a1830;
     --card:     #0a0818;
     --nav-h:    4rem;
+    --gutter:   clamp(1.15rem, 5vw, 6rem);
+    --content-max: 1400px;
 }
 
 * {
@@ -28,6 +30,27 @@ body {
     color: var(--text);
     font-family: 'Outfit', sans-serif;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+    overflow-x: clip;
+}
+
+img, video {
+    max-width: 100%;
+}
+
+a, button {
+    touch-action: manipulation;
+}
+
+:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
 }
 
 /* BACKGROUND ORBS */
@@ -154,7 +177,8 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 clamp(1.5rem, 6vw, 10rem);
+    /* Align nav edges with the centered content column on wide screens */
+    padding: 0 max(var(--gutter), calc((100% - var(--content-max)) / 2));
     background: rgba(7, 6, 15, 0.8);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
@@ -227,355 +251,24 @@ section {
     scroll-margin-top: var(--nav-h);
 }
 
-.section-bg-logos {
-    position: absolute;
-    inset: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    gap: 1.5rem;
-    container-type: size;
-    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+#about, #skills, #projects, #experience, #contact {
+    padding: clamp(3rem, 7vw, 7rem) var(--gutter);
 }
 
-.bg-scroll-track {
-    display: flex;
-    align-items: center;
-    gap: 6rem;
-    width: max-content;
-    animation: bg-scroll 60s linear infinite;
-    will-change: transform;
-    flex-shrink: 0;
-    min-width: 100%;
-    overflow: visible;
-}
-
-.section-bg-logos > .bg-scroll-track:nth-child(n) {
-    visibility: visible;
-}
-
-/* Explicit per-section animation-name assignment (rather than toggling
-   animation-direction) drives alternation everywhere. Each section's
-   odd/even phase is picked so its first row scrolls opposite to the
-   previous section's last row and its last row scrolls opposite to the
-   next section's first row, in the common case where all rows in both
-   sections are visible. NOTE: sections hide trailing rows at short
-   container heights (see the @container tiers below), so the row actually
-   adjacent to a section boundary can shift with viewport height — perfect
-   alternation at every possible height isn't achievable with a static
-   odd/even rule, only for the nominal/common case. */
-#about .section-bg-logos .bg-scroll-track:nth-child(odd) { animation-name: bg-scroll; }
-#about .section-bg-logos .bg-scroll-track:nth-child(even) { animation-name: bg-scroll-reverse; }
-
-#experience .section-bg-logos .bg-scroll-track:nth-child(odd) { animation-name: bg-scroll-reverse; }
-#experience .section-bg-logos .bg-scroll-track:nth-child(even) { animation-name: bg-scroll; }
-
-#projects .section-bg-logos .bg-scroll-track:nth-child(odd) { animation-name: bg-scroll-reverse; }
-#projects .section-bg-logos .bg-scroll-track:nth-child(even) { animation-name: bg-scroll; }
-
-#skills .section-bg-logos .bg-scroll-track:nth-child(odd) { animation-name: bg-scroll; }
-#skills .section-bg-logos .bg-scroll-track:nth-child(even) { animation-name: bg-scroll-reverse; }
-
-#contact .section-bg-logos .bg-scroll-track:nth-child(odd) { animation-name: bg-scroll; }
-#contact .section-bg-logos .bg-scroll-track:nth-child(even) { animation-name: bg-scroll-reverse; }
-
-@container (max-height: 900px) {
-    .section-bg-logos .bg-scroll-track:nth-child(n+7) { display: none; }
-}
-
-@container (max-height: 750px) {
-    .section-bg-logos .bg-scroll-track:nth-child(n+6) { display: none; }
-}
-
-@container (max-height: 600px) {
-    .section-bg-logos .bg-scroll-track:nth-child(n+5) { display: none; }
-}
-
-@container (max-height: 450px) {
-    .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
-}
-
-@container (max-height: 300px) {
-    .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
-}
-
-@container (max-height: 180px) {
-    .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
-}
-
-/* #about and #experience use much larger logos (up to 280px/260px) than the
-   generic thresholds above assume, so they need their own, more aggressive
-   tiers to avoid visible cropping. Scoped to >=769px width — that's where
-   the tablet media query (max-width:768px) stops shrinking .bg-logo/
-   .bg-mcmaster/.bg-telus, so below it the generic tiers (calibrated for
-   those smaller sizes) are safe on their own. */
-@media (min-width: 769px) {
-    /* Thresholds computed from measured max row footprint (logo height + row
-       gap, at the widths where each clamp() reaches its ceiling) plus a
-       small ~5px safety buffer for sub-pixel rendering variance — just
-       enough to guarantee N rows fit without sacrificing a row that
-       genuinely does fit. */
-    /* #about's .section-bg-logos also carries padding-bottom: 2rem (~36px).
-       @container size queries evaluate against the content box (border box
-       minus padding), while actual visual clipping happens at the border
-       box (the overflow:hidden edge) — so about's thresholds are shifted
-       down by that padding amount relative to the raw row-footprint math. */
-    @container (max-height: 1297px) {
-        #about .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
-    }
-    @container (max-height: 956px) {
-        #about .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
-    }
-    @container (max-height: 615px) {
-        #about .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
-    }
-
-    /* #experience now has up to 10 rows (grew from a max of 9 after the
-       Skrypt/GDG additions), and the section itself got much taller once
-       it switched to a 2x2 four-card grid, so heights well above the old
-       ~1450px ceiling are now common — these extra tiers cap rows 6-9. */
-    @container (max-height: 2929px) {
-        #experience .section-bg-logos .bg-scroll-track:nth-child(n+10) { display: none; }
-    }
-    @container (max-height: 2633px) {
-        #experience .section-bg-logos .bg-scroll-track:nth-child(n+9) { display: none; }
-    }
-    @container (max-height: 2337px) {
-        #experience .section-bg-logos .bg-scroll-track:nth-child(n+8) { display: none; }
-    }
-    @container (max-height: 2041px) {
-        #experience .section-bg-logos .bg-scroll-track:nth-child(n+7) { display: none; }
-    }
-    @container (max-height: 1745px) {
-        #experience .section-bg-logos .bg-scroll-track:nth-child(n+6) { display: none; }
-    }
-    @container (max-height: 1449px) {
-        #experience .section-bg-logos .bg-scroll-track:nth-child(n+5) { display: none; }
-    }
-    @container (max-height: 1153px) {
-        #experience .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
-    }
-    @container (max-height: 857px) {
-        #experience .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
-    }
-    @container (max-height: 561px) {
-        #experience .section-bg-logos .bg-scroll-track:nth-child(n+2) { display: none; }
-    }
-
-    /* #skills .section-bg-logos also carries padding-bottom: 3rem (~54px),
-       same content-box-vs-border-box offset as #about above. */
-    @container (max-height: 967px) {
-        #skills .section-bg-logos .bg-scroll-track:nth-child(n+4) { display: none; }
-    }
-    @container (max-height: 784px) {
-        #skills .section-bg-logos .bg-scroll-track:nth-child(n+3),
-        #projects .section-bg-logos .bg-scroll-track:nth-child(n+3) { display: none; }
-    }
-}
-
-.bg-logo {
-    height: clamp(80px, 10vw, 160px);
-    width: clamp(80px, 10vw, 160px);
-    object-fit: contain;
-    opacity: 0.07;
-    flex-shrink: 0;
-    pointer-events: none;
-    user-select: none;
-}
-
-@keyframes bg-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-@keyframes bg-scroll-reverse {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0); }
-}
-
-/* Pure black logos — invert to white */
-.bg-mcmaster {
-    filter: none;
-    height: clamp(150px, 20vw, 280px);
-    width: clamp(150px, 20vw, 280px);
-    margin-top: 2.5rem;
-}
-
-#about .section-bg-logos {
-    padding-bottom: 2rem;
-}
-.bg-cpp { filter: brightness(1.3) saturate(0.9); }
-.bg-autocad { filter: brightness(0) invert(1); }
-
-/* Colored logos — brighten and slightly desaturate for dark bg visibility */
-.bg-html { filter: brightness(1.3) saturate(0.9); }
-.bg-css { filter: brightness(1.3) saturate(0.9); }
-.bg-js { filter: brightness(1.3) saturate(0.9); }
-.bg-arduino { filter: brightness(1.3) saturate(0.9); }
-.bg-m365 { filter: brightness(1.3) saturate(0.9); }
-.bg-salesforce { filter: brightness(1.3) saturate(0.9); }
-.bg-claude { filter: brightness(1.3) saturate(0.9); }
-.bg-siemens { filter: brightness(1.3) saturate(0.9); }
-.bg-telus {
-    filter: brightness(0) invert(1);
-    height: clamp(150px, 18vw, 260px);
-    width: clamp(150px, 18vw, 260px);
-}
-
-.bg-skrypt {
-    /* bg-skrypt.png is a filled icon (dark teal background + white mark),
-       not a transparent-background line-art logo like Siemens/TELUS — the
-       brightness(0) invert(1) treatment used for those crushes it to a
-       blank white blob, so it's intentionally left unfiltered here. */
-    filter: none;
-}
-
-.section-bg-logos .bg-skrypt {
-    height: clamp(60px, 8vw, 110px);
-    width: clamp(60px, 8vw, 110px);
-}
-
-.section-bg-logos .bg-gdg {
-    filter: grayscale(100%) brightness(2);
-    height: clamp(60px, 8vw, 110px);
-    width: clamp(60px, 8vw, 110px);
-}
-
-.bg-siemens {
-    height: 240px;
-    width: 240px;
-}
-
-.bg-linkedin, .bg-github {
-    filter: brightness(0) invert(1);
-    height: clamp(140px, 16vw, 220px);
-    width: clamp(140px, 16vw, 220px);
-}
-
-/* On small phones reduce logo size so more rows fit */
-@media (max-width: 480px) {
-    .bg-logo {
-        height: clamp(50px, 12vw, 80px);
-        width: clamp(50px, 12vw, 80px);
-    }
-
-    .bg-mcmaster {
-        height: clamp(70px, 15vw, 100px);
-        width: clamp(70px, 15vw, 100px);
-    }
-
-    .bg-telus, .bg-siemens, .bg-skrypt, .bg-gdg {
-        height: clamp(60px, 12vw, 90px);
-        width: clamp(60px, 12vw, 90px);
-    }
-
-    .bg-linkedin, .bg-github {
-        height: clamp(80px, 15vw, 120px);
-        width: clamp(80px, 15vw, 120px);
-    }
-
-    .section-bg-logos {
-        gap: 0.8rem;
-    }
-
-    #skills .section-bg-logos,
-    #projects .section-bg-logos {
-        gap: 1.5rem;
-        padding-top: 1.5rem;
-    }
-}
-
-/* On tablets reduce gap slightly */
-@media (max-width: 768px) and (min-width: 481px) {
-    .bg-logo {
-        height: clamp(70px, 10vw, 120px);
-        width: clamp(70px, 10vw, 120px);
-    }
-
-    .section-bg-logos {
-        gap: 1rem;
-    }
-
-    #skills .section-bg-logos,
-    #projects .section-bg-logos {
-        gap: 2rem;
-        padding-top: 2rem;
-    }
-}
-
-/* On large desktops make sure rows fill the full section */
-@media (min-width: 1440px) {
-    .bg-logo {
-        height: clamp(130px, 11vw, 190px);
-        width: clamp(130px, 11vw, 190px);
-    }
-
-    .bg-mcmaster {
-        height: clamp(180px, 16vw, 260px);
-        width: clamp(180px, 16vw, 260px);
-    }
-
-    .bg-telus {
-        height: clamp(180px, 16vw, 260px);
-        width: clamp(180px, 16vw, 260px);
-    }
-
-    .section-bg-logos {
-        gap: 2rem;
-    }
-
-    #skills .section-bg-logos,
-    #projects .section-bg-logos {
-        gap: 4rem;
-        padding-top: 3rem;
-    }
-}
-
-/* Make sure all section content sits above bg logos */
-#about .hero-inner,
-#skills .skills-wrap,
-#experience .experience-wrap {
-    position: relative;
-    z-index: 1;
-}
-
-#skills .section-bg-logos,
-#projects .section-bg-logos {
-    gap: 4rem;
-    padding-bottom: 3rem;
-    padding-top: 3rem;
-}
-
-#contact .section-bg-logos {
-    padding-top: 3rem;
-    justify-content: space-evenly;
-}
-
-#projects .projects-wrap {
-    position: relative;
-    z-index: 1;
-}
-
-#about, #skills, #projects, #experience, #personal, #contact {
-    padding: clamp(3rem, 6vw, 7rem) clamp(1.5rem, 7vw, 10rem);
+#about {
+    padding-top: calc(var(--nav-h) + clamp(2rem, 5vw, 5rem));
 }
 
 .hero-inner,
 .skills-wrap,
 .projects-wrap,
 .experience-wrap,
-.personal-wrap,
 .contact-wrap {
-    max-width: min(1400px, 92vw);
+    position: relative;
+    z-index: 1;
+    max-width: var(--content-max);
     width: 100%;
+    min-width: 0;
     margin: 0 auto;
 }
 
@@ -591,20 +284,21 @@ section {
 
 .hero-inner {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
     gap: clamp(2rem, 5vw, 8rem);
     align-items: center;
 }
 
 .hero-content {
     max-width: 700px;
+    min-width: 0;
 }
 
 .hero-credentials {
     display: flex;
     flex-direction: column;
     gap: clamp(0.6rem, 1.2vw, 1rem);
-    margin-top: 2rem;
+    min-width: 0;
 }
 
 .credential-card {
@@ -633,7 +327,7 @@ section {
     transition: opacity 0.2s;
 }
 
-.credential-card:hover { transform: translateY(-4px); border-color: #8b5cf630; }
+.credential-card:hover { border-color: #8b5cf630; }
 .credential-card:hover::before { opacity: 1; }
 
 .credential-label {
@@ -654,9 +348,7 @@ section {
     text-transform: uppercase;
     font-family: 'Outfit', sans-serif;
     margin-bottom: 0.2rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
 }
 
 .credential-school {
@@ -664,58 +356,6 @@ section {
     color: #a8a7c7;
     font-weight: 300;
 }
-
-.github-link {
-    display: inline-block;
-    margin-top: 1.2rem;
-    font-size: 0.82rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #ffffff;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    transition: color 0.2s;
-    font-family: 'Outfit', sans-serif;
-}
-
-.github-link:hover { color: #6dd5fa; }
-
-.resume-card {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    padding: 1.4rem;
-}
-
-.resume-card-left {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.resume-card-left .github-link {
-    margin-top: 0;
-}
-
-.resume-card-right {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-}
-
-.resume-thumb {
-    width: 120px;
-    height: 50px;
-    object-fit: cover;
-    object-position: top;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    opacity: 0.8;
-    transition: opacity 0.2s;
-    display: block;
-}
-
-.resume-thumb:hover { opacity: 1; }
 
 .hero-eyebrow {
     font-size: 0.88rem;
@@ -845,7 +485,6 @@ section {
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(270px, 20vw, 280px), 1fr));
     gap: clamp(1rem, 2vw, 1.5rem);
 }
 
@@ -872,7 +511,7 @@ section {
     transition: opacity 0.2s;
 }
 
-.skill-card:hover { transform: translateY(-4px); border-color: #8b5cf630; }
+.skill-card:hover { border-color: #8b5cf630; }
 .skill-card:hover::before { opacity: 1; }
 .skill-card-soon { opacity: 0.5; }
 
@@ -890,7 +529,7 @@ section {
     letter-spacing: 0.3em;
     text-transform: uppercase;
     font-family: 'Outfit', sans-serif;
-    white-space: nowrap;
+    overflow-wrap: anywhere;
 }
 
 .skill-tags {
@@ -920,21 +559,22 @@ section {
     min-height: unset !important;
 }
 
-/* FLIP CARDS */
+/* FLIP CARDS
+   Both faces share one grid cell, so the card is always as tall as its
+   longest face — no fixed heights, no clipped or scrolling back face. */
 .flip-card {
-    perspective: 1000px;
-    height: 600px;
-    min-height: 600px;
+    perspective: 1200px;
     width: 100%;
+    min-width: 0;
     touch-action: manipulation;
     cursor: pointer;
 }
 
 .flip-card-inner {
     position: relative;
+    display: grid;
     width: 100%;
-    height: 600px;
-    min-height: 600px;
+    height: 100%;
     transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
     transform-style: preserve-3d;
 }
@@ -945,16 +585,13 @@ section {
 
 .flip-card-front,
 .flip-card-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 600px;
-    min-height: 600px;
+    grid-area: 1 / 1;
+    position: relative;
+    min-width: 0;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: 12px;
-    padding: 2rem;
+    padding: clamp(1.25rem, 2.5vw, 2rem);
     background: rgba(12, 10, 26, 0.75);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -967,9 +604,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    padding: 2rem;
     justify-content: flex-start;
-    overflow: hidden;
 }
 
 .flip-card-front::before,
@@ -994,26 +629,6 @@ section {
     flex-direction: column;
     justify-content: flex-start;
     gap: 1rem;
-    height: 100%;
-    overflow-y: auto;
-    max-height: 100%;
-}
-
-.flip-card-back::-webkit-scrollbar {
-    width: 4px;
-}
-
-.flip-card-back::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.flip-card-back::-webkit-scrollbar-thumb {
-    background: rgba(139, 92, 246, 0.4);
-    border-radius: 2px;
-}
-
-.flip-card-back::-webkit-scrollbar-thumb:hover {
-    background: rgba(139, 92, 246, 0.7);
 }
 
 .flip-card-back .project-name {
@@ -1078,7 +693,7 @@ section {
 }
 
 .back-highlights-list li {
-    font-size: 13px;
+    font-size: 0.85rem;
     color: #a8a7c7;
     font-weight: 300;
     font-family: 'Outfit', sans-serif;
@@ -1105,26 +720,30 @@ section {
     animation: videoFadeIn 0.8s ease forwards;
 }
 
-.project-image {
+.project-image,
+.project-media {
     width: 100%;
-    height: 140px;
-    object-fit: cover;
-    object-position: top;
+    aspect-ratio: 16 / 10;
     border-radius: 8px;
     flex-shrink: 0;
     display: block;
+    overflow: hidden;
 }
 
-img.project-image,
-.flip-card-front video {
-    width: 100%;
-    height: 220px !important;
-    min-height: 220px !important;
-    max-height: 220px !important;
+img.project-image {
+    height: auto;
     object-fit: cover;
     object-position: top;
-    border-radius: 8px;
-    flex-shrink: 0;
+}
+
+.project-media {
+    background: #000;
+}
+
+.project-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     display: block;
 }
 
@@ -1139,9 +758,9 @@ img.project-image,
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(280px, 28vw, 420px), 1fr));
-    gap: clamp(1.5rem, 2.5vw, 2.5rem);
-    align-items: start;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.5vw, 2.5rem);
+    align-items: stretch;
 }
 
 .project-card {
@@ -1167,7 +786,7 @@ img.project-image,
     transition: opacity 0.2s;
 }
 
-.project-card:hover { transform: translateY(-4px); border-color: #8b5cf630; }
+.project-card:hover { border-color: #8b5cf630; }
 .project-card:hover::before { opacity: 1; }
 
 .project-card-top {
@@ -1212,18 +831,10 @@ img.project-image,
     gap: 0.5rem;
 }
 
-/* Reserve exactly 2 tag rows on the front of every project card, regardless
-   of how many tags a given project has — so both cards' name/tags/hint
-   occupy identical vertical space and stay proportionally aligned instead
-   of drifting based on tag count. Scoped to .flip-card-front so it doesn't
-   affect .project-tags reused elsewhere (e.g. experience cards). */
-.flip-card-front .project-tags .tag {
-    line-height: 1.4;
-}
-
+/* Keep the front-face tag block a consistent 2 rows so both cards align;
+   the back face lists every tag. */
 .flip-card-front .project-tags {
-    min-height: calc(2 * (0.8rem * 1.4 + 0.6rem + 2px) + 0.5rem + 2px);
-    max-height: calc(2 * (0.8rem * 1.4 + 0.6rem + 2px) + 0.5rem + 2px);
+    max-height: calc(2 * (0.75rem * 1.4 + 0.6rem + 2px) + 0.5rem);
     overflow: hidden;
     align-content: flex-start;
 }
@@ -1239,7 +850,7 @@ img.project-image,
 
 .experience-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     /* grid-template-rows + auto-flow:column makes the grid fill top-to-
        bottom within a column before moving to the next column, so with
        card order Skrypt, GDG, Siemens, TELUS this produces Skrypt above
@@ -1250,13 +861,6 @@ img.project-image,
     grid-auto-flow: column;
     gap: clamp(1.5rem, 2.5vw, 2.5rem);
     align-items: stretch;
-    width: 100%;
-}
-
-.experience-grid .experience-item:nth-child(3) {
-    grid-column: auto;
-    max-width: 100%;
-    margin: 0;
     width: 100%;
 }
 
@@ -1287,7 +891,7 @@ img.project-image,
     transition: opacity 0.2s;
 }
 
-.experience-item:hover { transform: translateY(-4px); border-color: #8b5cf630; }
+.experience-item:hover { border-color: #8b5cf630; }
 .experience-item:hover::before { opacity: 1; }
 
 .experience-header {
@@ -1420,11 +1024,13 @@ img.project-image,
     flex-shrink: 0;
 }
 
-.experience-item .company-logo.bg-skrypt,
-.experience-item .brand-logo.bg-skrypt {
-    filter: brightness(0) invert(1);
-    mix-blend-mode: screen;
+/* Inline vector mark — no filters/blend so edges stay crisp at any DPI */
+.brand-logo-skrypt {
+    filter: none;
+    mix-blend-mode: normal;
     opacity: 1;
+    height: 32px;
+    width: 32px;
 }
 
 .bg-gdg.company-logo,
@@ -1459,13 +1065,9 @@ img.project-image,
     z-index: 1;
 }
 
-#contact .section-bg-logos .bg-scroll-track:nth-child(even) {
-    margin-left: calc(clamp(140px, 16vw, 220px) / 2 + 3rem);
-}
-
 .contact-inner {
     display: grid;
-    grid-template-columns: 1.4fr 0.6fr;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
     gap: clamp(2rem, 4vw, 6rem);
     align-items: start;
 }
@@ -1558,7 +1160,7 @@ img.project-image,
     transition: opacity 0.2s;
 }
 
-.contact-chip:hover { border-color: #8b5cf630; transform: translateY(-4px); }
+.contact-chip:hover { border-color: #8b5cf630; }
 .contact-chip:hover::before { opacity: 1; }
 
 .skill-card::after,
@@ -1612,96 +1214,81 @@ footer {
     background-clip: text;
 }
 
-/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+/* ─── RESPONSIVE ───────────────────────────────────────────────
+   Breakpoints: ≥1200 wide desktop · 1024–1199 desktop · 768–1023 tablet
+   · <768 phone (hamburger nav) · <=380 small phone. Layout is fluid
+   between them — no fixed heights anywhere. */
 
-/* Large desktop */
+.company-logo-telus {
+    height: clamp(60px, 6vw, 84px);
+    margin-top: 14px;
+}
+
+.skills-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Desktop */
 @media (min-width: 1024px) {
-    .experience-grid { grid-template-columns: repeat(2, 1fr); }
-
-    .hero-name, .section-title { font-size: clamp(2.8rem, 7vw, 5rem); }
+    .hero-name, .section-title { font-size: clamp(2.8rem, 5.5vw, 5rem); }
 
     .hero-tagline { font-size: 1.17rem; }
     .section-eyebrow, .hero-eyebrow { font-size: 0.92rem; }
     .credential-title { font-size: 1.05rem; }
-    .resume-thumb { width: 140px; height: 60px; }
     .project-desc { font-size: 1.05rem; }
     .flip-card-back .back-desc { font-size: 1.05rem; }
     .experience-bullets li { font-size: 1.05rem; }
-    .skill-name, .project-name { font-size: 0.85rem; }
 
-    /* Force 2×2 grid — prevents uneven 3-then-1 layout */
-    .projects-grid { grid-template-columns: repeat(2, 1fr); }
-
-    .flip-card,
-    .flip-card-inner,
-    .flip-card-front,
-    .flip-card-back {
-        min-height: 650px;
-        height: 650px;
-    }
+    /* Side-by-side hero: drop the credentials column so it sits lower
+       beside the tagline instead of floating at the heading line */
+    .hero-credentials { margin-top: clamp(5rem, 9vw, 9rem); }
 }
 
 @media (min-width: 1440px) {
-    .skills-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .hero-inner {
-        grid-template-columns: 1.4fr 1fr;
-    }
+    .hero-inner { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
 }
 
-/* Tablet */
-@media (max-width: 1024px) and (min-width: 768px) {
-    nav { padding: 0 2rem; }
+/* Below wide desktop: 4 skill cards become a 2×2 grid */
+@media (max-width: 1199px) {
+    .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
-    .nav-links { gap: 0.8rem; }
-    .nav-links a { font-size: 0.78rem; letter-spacing: 0.08em; }
-
-    #about { padding: 6rem 2rem 3rem; }
-
+/* Tablet & below: hero stacks, credentials tile into two columns */
+@media (max-width: 1023px) {
     .hero-inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
     }
 
-    #skills, #projects, #contact { padding: 3rem 2rem; }
+    .hero-content { max-width: 100%; }
+    .hero-tagline { max-width: 68ch; }
 
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .hero-credentials {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .contact-inner {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
         gap: 2rem;
     }
+}
 
-    .hero-name, .section-title {
-        font-size: clamp(2rem, 5vw, 3.5rem);
+/* Tablet nav */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 0.78rem; letter-spacing: 0.1em; }
+}
+
+/* Experience goes single-column before cards get cramped */
+@media (max-width: 899px) {
+    .experience-grid {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: none;
+        grid-auto-flow: row;
     }
 }
 
-@media (max-width: 900px) {
-    .experience-header {
-        flex-wrap: wrap;
-    }
-
-    .experience-date {
-        width: 100%;
-        text-align: left;
-        white-space: normal;
-    }
-}
-
-/* Mobile */
+/* Phone */
 @media (max-width: 767px) {
-    /* Nav */
-    nav { padding: 0 1.5rem; }
-
     .nav-toggle { display: flex; }
 
     .nav-links {
@@ -1711,165 +1298,113 @@ footer {
         right: 0;
         flex-direction: column;
         gap: 0;
-        list-style: none;
         background: rgba(7, 6, 15, 0.97);
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--border);
         padding: 0.5rem 0 1rem;
         z-index: 99;
-        /* Hidden by default */
+        max-height: calc(100dvh - var(--nav-h));
+        overflow-y: auto;
         display: none;
-        pointer-events: none;
     }
 
-    .nav-links.open {
-        display: flex;
-        pointer-events: auto;
-    }
+    .nav-links.open { display: flex; }
 
     .nav-links li { width: 100%; }
 
     .nav-links a {
         display: block;
-        padding: 0.85rem 2rem;
-        font-size: 0.80rem;
+        padding: 0.95rem var(--gutter);
+        font-size: 0.85rem;
         letter-spacing: 0.2em;
     }
 
-    /* About */
-    #about {
-        align-items: flex-start;
-        overflow: hidden;
-    }
-
-    .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .hero-content {
-        width: 100%;
-        max-width: 100%;
-    }
-
     .hero-name, .section-title {
-        font-size: clamp(1.9rem, 8vw, 2.8rem);
+        font-size: clamp(2rem, 9vw, 2.8rem);
     }
 
-    .hero-tagline { font-size: 1rem; }
-
-
-    /* Sections */
-    #about, #skills, #projects, #experience, #personal, #contact {
-        padding: 2.5rem 1.5rem;
+    .hero-tagline {
+        font-size: 1rem;
+        line-height: 1.75;
     }
 
-    #about {
-        padding-top: calc(var(--nav-h) + 2.5rem);
+    .section-eyebrow, .hero-eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.25em;
+        margin-bottom: 1rem;
     }
 
-    .skills-grid { grid-template-columns: 1fr; }
-
-    .projects-grid { grid-template-columns: 1fr; }
-
-    .experience-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: none;
-        grid-auto-flow: row;
-    }
-
-    .experience-grid .experience-item:nth-child(3) {
-        grid-column: 1;
-        max-width: 100%;
-    }
-
-    .experience-item {
-        padding: 1.5rem;
-    }
-
-    .experience-header {
-        flex-wrap: wrap;
-        flex-direction: column;
-        gap: 0.4rem;
-    }
-
-    .experience-date {
-        white-space: normal;
-        text-align: left;
-        margin-left: 0;
-        align-self: flex-start;
-    }
-
-    .flip-card,
-    .flip-card-inner,
-    .flip-card-front,
-    .flip-card-back {
-        min-height: 500px;
-        height: 500px;
-    }
-
-    /* Back face: compact layout so all content fits without scrolling */
-    .flip-card-back { padding: 1.5rem; gap: 0.6rem; }
-    .flip-card-back .back-desc { font-size: 0.80rem; line-height: 1.6; }
-    .flip-card-back .back-hint { margin-top: 0.5rem; }
-    .back-highlights-list { gap: 0.15rem; }
-    .back-highlights-list li { font-size: 11px; line-height: 1.4; }
-
-    .contact-inner {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    /* Cards */
     .hero-credentials {
+        grid-template-columns: minmax(0, 1fr);
         gap: 0.7rem;
-        width: 100%;
     }
 
-    .credential-card {
-        padding: 0.85rem;
-        width: 100%;
-        overflow: hidden;
-    }
+    .credential-card { padding: 1rem 1.1rem; }
 
+    .credential-label,
     .credential-title {
-        white-space: normal;
-        overflow: hidden;
-        text-overflow: unset;
+        font-size: 0.8rem;
+        letter-spacing: 0.2em;
     }
 
-    .resume-card {
-        flex-direction: column;
-        align-items: flex-start;
+    .skills-grid,
+    .projects-grid,
+    .contact-inner {
+        grid-template-columns: minmax(0, 1fr);
     }
 
-    .resume-thumb {
-        width: 100%;
-        height: 100px;
+    .skill-card { padding: 1.5rem; }
+
+    .skill-name,
+    .project-name {
+        letter-spacing: 0.2em;
     }
+
+    .experience-item { padding: 1.4rem; }
+
+    .experience-bullets li { font-size: 0.95rem; }
+
+    .company-brand-name { font-size: 1.1rem; }
+
+    .flip-card-back .back-desc { font-size: 0.95rem; line-height: 1.65; }
+
+    .contact-form { padding: 1.4rem; }
 
     /* iOS: prevent auto-zoom on input focus */
     .form-input { font-size: 16px; }
 
-    footer { padding: 1.5rem; }
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+        padding: 0.95rem 1.8rem;
+    }
 
-    /* Push pink orb off-screen on mobile to avoid colored bar */
+    footer { padding: 1.5rem var(--gutter) 2.5rem; }
+
+    .toast {
+        left: var(--gutter);
+        right: var(--gutter);
+        bottom: 1.25rem;
+        text-align: center;
+    }
+
+    /* Lighter background on phones: fewer, smaller blurred orbs */
+    .orb { filter: blur(80px); }
+    .orb-1 { width: 320px; height: 320px; }
     .orb-2 { bottom: -300px; right: -120px; }
-    .orb-6 { display: none; }
+    .orb-6, .orb-7, .orb-8 { display: none; }
 }
 
 /* Small phones */
 @media (max-width: 380px) {
-    .nav-logo { font-size: 1rem; }
+    .nav-logo { font-size: 1.1rem; }
 
-    .hero-name, .section-title { font-size: 1.8rem; }
+    .hero-name, .section-title { font-size: 1.85rem; }
 
-    .hero-tagline { font-size: 0.9rem; }
+    .hero-tagline { font-size: 0.95rem; }
 
-    /* Back face: further compact at 320-380px */
-    .flip-card-back { padding: 1.2rem; gap: 0.5rem; }
-    .flip-card-back .back-desc { font-size: 0.75rem; }
-    .back-highlights-list li { font-size: 10px; }
+    .tag { font-size: 0.72rem; padding: 0.28rem 0.6rem; }
 }
 
 
@@ -1921,4 +1456,28 @@ footer {
 .experience-item.reveal.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Hover lift only on devices with a real pointer — avoids sticky
+   hover states after a tap on touch screens. */
+@media (hover: hover) and (pointer: fine) {
+    .credential-card.reveal.visible:hover,
+    .skill-card.reveal.visible:hover,
+    .experience-item.reveal.visible:hover,
+    .contact-chip.reveal.visible:hover {
+        transform: translateY(-4px);
+        transition: transform 0.25s ease, border-color 0.2s;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal { opacity: 1 !important; transform: none !important; }
 }

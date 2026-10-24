@@ -28,10 +28,25 @@ if (contactForm) {
     });
 }
 
-// FLIP CARDS — click to flip
+// FLIP CARDS — click / Enter / Space to flip; links inside don't flip
 document.querySelectorAll('.flip-card').forEach(card => {
-    card.addEventListener('click', () => {
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-pressed', 'false');
+    const flip = () => {
         card.classList.toggle('flipped');
+        card.setAttribute('aria-pressed', card.classList.contains('flipped'));
+    };
+    card.addEventListener('click', (e) => {
+        if (e.target.closest('a')) return;
+        flip();
+    });
+    card.addEventListener('keydown', (e) => {
+        if (e.target !== card) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            flip();
+        }
     });
 });
 
@@ -39,16 +54,31 @@ document.querySelectorAll('.flip-card').forEach(card => {
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-links');
 
+const setMenu = (open) => {
+    navToggle.classList.toggle('open', open);
+    navMenu.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open);
+};
+
 navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('open');
-    navMenu.classList.toggle('open');
+    setMenu(!navMenu.classList.contains('open'));
 });
 
 navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        navToggle.classList.remove('open');
-        navMenu.classList.remove('open');
-    });
+    link.addEventListener('click', () => setMenu(false));
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false);
+});
+
+document.addEventListener('click', (e) => {
+    if (navMenu.classList.contains('open') && !e.target.closest('nav')) setMenu(false);
+});
+
+// Close the mobile menu if the viewport grows past the phone breakpoint
+window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
+    if (e.matches) setMenu(false);
 });
 
 // SCROLL REVEAL — repeats every time you enter/leave a section
