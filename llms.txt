@@ -17,7 +17,7 @@
 - [Employee Management System](https://github.com/ruquaiya-ali/Employee-Management-System): C++ object-oriented console app for managing employees, managers, and interns.
 
 ## Links
-- [Portfolio](https://ruquaiyaali.com/)
-- [Resume (PDF)](https://ruquaiyaali.com/images/RuquaiyaAli2027.pdf)
+- [Portfolio](https://ruquaiya.com/)
+- [Resume (PDF)](https://ruquaiya.com/images/RuquaiyaAli2027.pdf)
 - [LinkedIn](https://linkedin.com/in/ruquaiya-ali)
 - [GitHub](https://github.com/ruquaiya-ali)

@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ruquaiyaali.com/sitemap.xml
+Sitemap: https://ruquaiya.com/sitemap.xml
