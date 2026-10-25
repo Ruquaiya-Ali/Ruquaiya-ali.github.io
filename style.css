@@ -148,6 +148,9 @@ a:hover{color:var(--text)}
 /* stacked hero: centre the name + intro, then the status card */
 @media (max-width:1080px){
   .hero-intro{display:flex;flex-direction:column;align-items:center;text-align:center}
+  .hero-intro .name{font-size:clamp(2.4rem,11.5vw,8rem);white-space:nowrap}
+  .hero-intro .name .ln{display:inline-block;vertical-align:bottom}
+  .hero-intro .name .ln+.ln{margin-left:.08em}
   .hero-intro .eyebrow,.hero-intro .ctas,.hero-intro .socials{justify-content:center}
   .hero-intro .ticker{margin-inline:auto}
   .console{width:100%;max-width:780px;margin-inline:auto;font-size:clamp(12.5px,2.1vw,16px)}
@@ -255,6 +258,8 @@ section.block{position:relative;padding-block:clamp(56px,7vw,110px)}
 .spec-head b{color:var(--accent);font-weight:500}
 .sh-title-row{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,2.5vw,36px)}
 .about-logo{display:block;height:clamp(52px,6.2vw,104px);width:auto;padding-left:clamp(16px,2.5vw,36px);border-left:1px solid var(--line-2);margin-left:clamp(8px,2vw,32px);transform:translateY(clamp(6px,1vw,16px))}
+.about-logo-lg{display:none;height:clamp(96px,9.5vw,168px);width:auto;flex:none}
+@media (min-width:981px){.about-logo{display:none}.about-logo-lg{display:block}}
 .spec-row{position:relative;display:grid;grid-template-columns:9.5em minmax(0,1fr) auto;gap:16px;align-items:center;padding:22px 24px;border-top:1px solid var(--line);transition:background .35s}
 .spec-row::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(139,92,246,.14),transparent 70%);opacity:0;transition:opacity .35s}
 .spec-row:hover::after{opacity:1}
@@ -303,7 +308,9 @@ section.block{position:relative;padding-block:clamp(56px,7vw,110px)}
 .xp-panel::after{content:'';position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.9),rgba(42,174,250,.9),transparent)}
 .xp-panel.front{border-color:rgba(139,92,246,.4);box-shadow:0 50px 100px -40px rgba(0,0,0,.95),0 0 80px -30px rgba(139,92,246,.7)}
 .xp-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 40px;align-items:start}
-.xp-logo{display:inline-grid;place-items:center;min-width:72px;height:72px;padding:0 18px;border-radius:18px;border:1px solid var(--line-2);background:rgba(255,255,255,.04);margin-bottom:22px}
+.xp-brand{display:flex;align-items:center;gap:clamp(14px,2vw,22px);margin-bottom:22px;min-width:0}
+.xp-logo{display:inline-grid;place-items:center;flex:none;min-width:72px;height:72px;padding:0 18px;border-radius:18px;border:1px solid var(--line-2);background:rgba(255,255,255,.04)}
+.xp-company{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:clamp(1.6rem,2.6vw,2.5rem);line-height:1.05;letter-spacing:-.01em;min-width:0;text-wrap:balance}
 .xp-logo img{max-width:170px;max-height:40px;filter:brightness(0) invert(1);opacity:.95}
 .xp-logo img.wordmark{height:26px;max-height:none;width:auto}
 .xp-logo img.telus{height:60px;max-height:none;width:auto}
