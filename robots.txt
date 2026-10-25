@@ -1,0 +1,5 @@
+# Everyone is welcome, including AI search crawlers
+User-agent: *
+Allow: /
+
+Sitemap: https://ruquaiyaali.com/sitemap.xml
