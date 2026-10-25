@@ -154,7 +154,6 @@ a:hover{color:var(--text)}
 
 .eyebrow{display:block;font-family:var(--f-mono);font-size:13px;letter-spacing:.04em;color:var(--accent);margin-bottom:22px}
 .live-dot{position:relative;display:inline-block;vertical-align:middle;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
-.eyebrow .live-dot{margin:-2px 12px 0 0}
 .live-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--cyan);opacity:0}
 
 .name{font-family:var(--f-display);font-weight:500;font-size:clamp(3.2rem,9vw,10.5rem);line-height:.92;letter-spacing:-.02em}
