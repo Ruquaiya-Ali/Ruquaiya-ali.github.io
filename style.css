@@ -254,7 +254,7 @@ section.block{position:relative;padding-block:clamp(56px,7vw,110px)}
 .spec-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 24px;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--text-2);background:rgba(255,255,255,.02)}
 .spec-head b{color:var(--accent);font-weight:500}
 .sh-title-row{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,2.5vw,36px)}
-.about-logo{display:block;height:clamp(52px,6.2vw,104px);width:auto;padding-left:clamp(16px,2.5vw,36px);border-left:1px solid var(--line-2)}
+.about-logo{display:block;height:clamp(52px,6.2vw,104px);width:auto;padding-left:clamp(16px,2.5vw,36px);border-left:1px solid var(--line-2);margin-left:clamp(8px,2vw,32px);transform:translateY(clamp(6px,1vw,16px))}
 .spec-row{position:relative;display:grid;grid-template-columns:9.5em minmax(0,1fr) auto;gap:16px;align-items:center;padding:22px 24px;border-top:1px solid var(--line);transition:background .35s}
 .spec-row::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(139,92,246,.14),transparent 70%);opacity:0;transition:opacity .35s}
 .spec-row:hover::after{opacity:1}
@@ -376,7 +376,8 @@ section.block{position:relative;padding-block:clamp(56px,7vw,110px)}
 .contact .orb-1{top:auto;bottom:-40%;left:-20%;opacity:.3}
 .contact .orb-2{top:10%;right:-20%;opacity:.2}
 .ct-head{font-family:var(--f-display);font-weight:500;font-size:clamp(3.4rem,13vw,13rem);line-height:.86;letter-spacing:-.025em}
-.ct-head .grad-text{filter:drop-shadow(0 0 40px rgba(139,92,246,.35))}
+.ct-head .grad-text,.sh h2 .grad-text{filter:drop-shadow(0 0 40px rgba(139,92,246,.35))}
+.sh h2 .grad-text{padding-right:.08em}
 .ct-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);margin-top:clamp(28px,4vw,52px);align-items:start}
 @media (max-width:980px){.ct-grid{grid-template-columns:minmax(0,1fr)}.contact .sh-idx,.ct-head{text-align:center}}
 .form{display:grid;gap:18px;padding:clamp(22px,3.2vw,40px);border-radius:28px;border:1px solid var(--line-2);background:var(--panel)}
