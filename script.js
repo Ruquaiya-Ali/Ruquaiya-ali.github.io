@@ -150,10 +150,25 @@
       tabList.scrollTo({ left: t.offsetLeft - (tabList.clientWidth - t.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
     };
 
+    // flip cards: front summary <-> scrollable back; only the front card of the ring can flip
+    const flipCard = (card, on = !card.classList.contains('flipped'), focusFace = false) => {
+      card.classList.toggle('flipped', on);
+      const [face, back] = card.querySelectorAll('.face');
+      face.inert = on; face.setAttribute('aria-hidden', String(on));
+      back.inert = !on; back.setAttribute('aria-hidden', String(!on));
+      if (focusFace) (on ? back : face).querySelector('.flip-btn').focus();
+      updatePaused();
+    };
+    cards.filter((c) => c.classList.contains('flipcard')).forEach((card) => {
+      // keyboard activation (pointer taps are handled by the drag/tap logic below)
+      card.querySelectorAll('.flip-btn').forEach((b) => b.addEventListener('click', (e) => { if (e.detail === 0) flipCard(card, undefined, true); }));
+    });
+
     const goTo = (target) => {
       const from = pos, delta = target - from, t0 = performance.now(), dur = reduce ? 0 : 1100;
       cancelAnimationFrame(anim);
       animating = true; elapsed = 0;
+      cards.forEach((c) => { if (c.classList.contains('flipped')) flipCard(c, false); });
       setFront(((Math.round(target) % n) + n) % n);
       const step = (now) => {
         const k = dur ? Math.min(1, (now - t0) / dur) : 1;
@@ -167,7 +182,7 @@
     const goIndex = (k) => { const r = Math.round(pos); goTo(r + wrapD(k - r)); };
 
     const updatePaused = () => {
-      paused = reduce || hover || focusIn || dragging || !inView || document.hidden;
+      paused = reduce || hover || focusIn || dragging || !inView || document.hidden || cards.some((c) => c.classList.contains('flipped'));
       orbit.classList.toggle('paused', paused);
     };
     let last = performance.now();
@@ -185,9 +200,11 @@
     new IntersectionObserver(([en]) => { inView = en.isIntersecting; updatePaused(); }, { threshold: 0.3 }).observe(orbit);
 
     // drag / swipe to spin; a tap on a side card brings it to the front
-    let downX = 0, downPos = 0, moved = false;
+    let downX = 0, downPos = 0, moved = false, downTarget = null;
     orbit.addEventListener('pointerdown', (e) => {
       if (e.button !== 0) return;
+      if (e.pointerType === 'mouse' && e.target.closest('.face-scroll')) return; // let the mouse scroll/select the back face
+      downTarget = e.target;
       dragging = true; moved = false; downX = e.clientX; downPos = pos;
       cancelAnimationFrame(anim); animating = false;
       orbit.setPointerCapture(e.pointerId);
@@ -203,6 +220,10 @@
     const release = (e) => {
       if (!dragging) return;
       dragging = false; orbit.classList.remove('dragging'); updatePaused();
+      if (!moved && e.type === 'pointerup') {
+        const card = downTarget && downTarget.closest('.flipcard');
+        if (card && card.classList.contains('front')) { pos = downPos; layout(); flipCard(card); return; }
+      }
       if (!moved) {
         const r = cards.find((c) => c.classList.contains('front')).getBoundingClientRect();
         if (e.clientX < r.left) return goTo(Math.round(pos) - 1);
@@ -227,6 +248,20 @@
     measure(); layout(); setFront(0); updatePaused(); requestAnimationFrame(tick);
   };
   document.querySelectorAll('[data-ring]').forEach(makeRing);
+
+  /* project flip cards: tap anywhere (except links) to flip; keyboard moves focus to the visible face */
+  document.querySelectorAll('.pc.flipcard').forEach((card) => {
+    const [face, back] = card.querySelectorAll('.face');
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
+      if (e.target.closest('.face-scroll') && getSelection().toString()) return; // selecting text, not flipping
+      const on = !card.classList.contains('flipped');
+      card.classList.toggle('flipped', on);
+      face.inert = on; face.setAttribute('aria-hidden', String(on));
+      back.inert = !on; back.setAttribute('aria-hidden', String(!on));
+      if (e.detail === 0 && e.target.closest('.flip-btn')) (on ? back : face).querySelector('.flip-btn').focus();
+    });
+  });
 
   /* project cards: 3D tilt + spotlight; skills: spotlight */
   if (finePointer && !reduce) {
