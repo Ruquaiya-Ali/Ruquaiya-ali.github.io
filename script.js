@@ -89,7 +89,8 @@
   /* revolving rings (experience, skills): cards orbit a vertical axis, auto-advancing */
   const makeRing = (root) => {
     const orbit = root.querySelector('.orbit');
-    const cards = [...orbit.querySelector('.orbit-ring').children];
+    const ring = orbit.querySelector('.orbit-ring');
+    const cards = [...ring.children];
     const tabs = [...root.querySelectorAll('[role="tab"]')];
     const tabList = root.querySelector('[role="tablist"]');
     const dots = [...root.querySelectorAll('.xp-dots i')];
@@ -99,14 +100,24 @@
     const wrapD = (d) => { d = ((d % n) + n) % n; return d > n / 2 ? d - n : d; };
     const radii = () => { const w = orbit.clientWidth; return [Math.min(w * 0.4, 600), Math.min(w * 0.45, 520)]; };
 
+    // natural card heights; the stage blends between the two cards nearest the front
+    let heights = [];
+    const measure = () => { heights = cards.map((c) => c.offsetHeight); };
+
     const layout = () => {
       const [rx, rz] = radii();
       cards.forEach((c, i) => {
         const phi = wrapD(i - pos) * STEP, depth = (Math.cos(phi) + 1) / 2; // 1 = front, 0 = back
-        c.style.transform = `translate3d(${(Math.sin(phi) * rx).toFixed(1)}px,0,${((Math.cos(phi) - 1) * rz).toFixed(1)}px) rotateY(${(phi * 0.62).toFixed(4)}rad)`;
+        // each card gets its own perspective and is stacked by depth, so cards never slice through each other
+        c.style.transform = `perspective(2200px) translate3d(${(Math.sin(phi) * rx).toFixed(1)}px,0,${((Math.cos(phi) - 1) * rz).toFixed(1)}px) rotateY(${(phi * 0.62).toFixed(4)}rad)`;
+        c.style.zIndex = String(Math.round(depth * 100));
         c.style.opacity = (0.15 + 0.85 * depth ** 1.6).toFixed(3);
         c.style.filter = depth > 0.995 ? 'none' : `brightness(${(0.45 + 0.55 * depth).toFixed(2)}) blur(${((1 - depth) * 2.5).toFixed(1)}px)`;
       });
+      if (heights.length) {
+        const i0 = Math.floor(pos), f = pos - i0, a = ((i0 % n) + n) % n, b = (a + 1) % n;
+        ring.style.height = (heights[a] * (1 - f) + heights[b] * f).toFixed(1) + 'px';
+      }
     };
 
     const setFront = (k) => {
@@ -192,7 +203,8 @@
       });
     });
     addEventListener('resize', layout);
-    layout(); setFront(0); updatePaused(); requestAnimationFrame(tick);
+    cards.forEach((c) => new ResizeObserver(() => { measure(); layout(); }).observe(c));
+    measure(); layout(); setFront(0); updatePaused(); requestAnimationFrame(tick);
   };
   document.querySelectorAll('[data-ring]').forEach(makeRing);
 
