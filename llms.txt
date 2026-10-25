@@ -1,0 +1,23 @@
+# Ruquaiya Ali
+
+> Ruquaiya Ali is an Automation Engineering Technology (BTech) student at McMaster University in Ontario, Canada, and AI Product Manager at Skrypt AI Labs. She works at the intersection of engineering and business, aiming for roles in product management, technical sales, solutions engineering, and business development.
+
+## Experience
+- AI Product Manager, Skrypt AI Labs (Remote), Aug 2026 to present
+- Business Development & Engineering Processes Intern, Siemens Canada (Hybrid), Jun 2026 to Aug 2026
+- Finance Coordinator / Hackathon Organizer, Google Developer Groups (Hybrid), Jul 2025 to present
+- Media Search Analyst, iOS, TELUS Digital AI (Remote), May 2025 to Jul 2025
+
+## Education
+- Bachelor of Technology, Automation Engineering, McMaster University
+- Certificate in Business Management (ACBSP accredited), McMaster University
+
+## Projects
+- [TruthLens](https://github.com/ruquaiya-ali/TruthLens): AI-powered Chrome extension that analyzes news articles for political bias, credibility, emotional manipulation, and rhetorical tactics using the Claude API and a FastAPI backend.
+- [Employee Management System](https://github.com/ruquaiya-ali/Employee-Management-System): C++ object-oriented console app for managing employees, managers, and interns.
+
+## Links
+- [Portfolio](https://ruquaiya.com/)
+- [Resume (PDF)](https://ruquaiya.com/images/RuquaiyaAli2027.pdf)
+- [LinkedIn](https://linkedin.com/in/ruquaiya-ali)
+- [GitHub](https://github.com/ruquaiya-ali)
