@@ -1,116 +1,264 @@
-// FORM — intercept submit, send via fetch, then clear inputs
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const data = new FormData(contactForm);
-        try {
-            const res = await fetch(contactForm.action, {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            });
-            if (res.ok) {
-                contactForm.reset();
-                const toast = document.createElement('div');
-                toast.className = 'toast';
-                toast.textContent = '// Message sent successfully';
-                document.body.appendChild(toast);
-                setTimeout(() => toast.classList.add('show'), 10);
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                    setTimeout(() => toast.remove(), 400);
-                }, 3000);
-            }
-        } catch (_) {
-            // silently fail — form still attempted
-        }
-    });
-}
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-// FLIP CARDS — click / Enter / Space to flip; links inside don't flip
-document.querySelectorAll('.flip-card').forEach(card => {
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('role', 'button');
-    card.setAttribute('aria-pressed', 'false');
-    const flip = () => {
-        card.classList.toggle('flipped');
-        card.setAttribute('aria-pressed', card.classList.contains('flipped'));
+  /* hero spotlight follows the cursor */
+  const hero = document.querySelector('.hero');
+  if (finePointer && !reduce) {
+    let raf = 0;
+    hero.addEventListener('pointermove', (e) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = hero.getBoundingClientRect();
+        hero.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  }
+
+  /* rotating ticker: highlight one discipline at a time */
+  const words = [...document.querySelectorAll('.tw')];
+  if (!reduce && words.length) {
+    let t = 0;
+    setInterval(() => {
+      words[t].classList.remove('on');
+      t = (t + 1) % words.length;
+      words[t].classList.add('on');
+    }, 2200);
+  }
+
+  /* count-up stats, once, when the band is on screen */
+  const fmt = (n) => Math.round(n).toLocaleString('en-US');
+  const stats = [...document.querySelectorAll('[data-count]')];
+  const paint = (el, k) => { el.textContent = (el.dataset.prefix || '') + fmt(+el.dataset.count * k) + el.dataset.suffix; };
+  if (!reduce && 'IntersectionObserver' in window) {
+    stats.forEach((el) => paint(el, 0));
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      const start = performance.now(), dur = 1800;
+      const step = (now) => {
+        const k = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - k, 4);
+        stats.forEach((el) => paint(el, eased));
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, { threshold: 0.35 });
+    io.observe(document.getElementById('stats'));
+  }
+
+  /* nav: active section + sliding indicator */
+  const ind = document.querySelector('.nav-ind');
+  const deskLinks = [...document.querySelectorAll('.nav-links a')];
+  const menuLinks = [...document.querySelectorAll('.menu a')];
+  const here = document.querySelector('.nav-here');
+  const setActive = (id) => {
+    let hit = null;
+    deskLinks.forEach((a) => { const on = a.hash === '#' + id; a.classList.toggle('on', on); if (on) hit = a; });
+    menuLinks.forEach((a) => a.classList.toggle('on', a.hash === '#' + id));
+    here.textContent = '// ' + (hit ? hit.textContent.toLowerCase() : 'home');
+    if (hit) {
+      ind.style.width = hit.offsetWidth + 'px';
+      ind.style.transform = `translateX(${hit.offsetLeft}px)`;
+      ind.style.opacity = 1;
+    } else ind.style.opacity = 0;
+  };
+  let current = 'home';
+  const secIo = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { current = e.target.id; setActive(current); } });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('main section[id]').forEach((s) => secIo.observe(s));
+  addEventListener('resize', () => setActive(current));
+  document.fonts && document.fonts.ready.then(() => setActive(current));
+
+  /* phone menu */
+  const btn = document.querySelector('.menu-btn');
+  const menu = document.getElementById('menu');
+  const setMenu = (open) => {
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  btn.addEventListener('click', () => setMenu(menu.hidden));
+  menuLinks.forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+  document.addEventListener('click', (e) => { if (!menu.hidden && !e.target.closest('.nav, .menu')) setMenu(false); });
+  matchMedia('(min-width: 881px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
+
+  /* experience: revolving ring — cards orbit a vertical axis, auto-advancing */
+  const orbit = document.querySelector('.orbit');
+  const cards = [...orbit.querySelectorAll('.xp-panel')];
+  const tabs = [...document.querySelectorAll('.xp-tab')];
+  const tabList = document.querySelector('.xp-list');
+  const dots = [...document.querySelectorAll('.xp-dots i')];
+  const n = cards.length, STEP = (Math.PI * 2) / n, DWELL = 5500;
+  let pos = 0, anim = 0, animating = false, elapsed = 0;
+  let hover = false, focusIn = false, inView = false, dragging = false, paused = true;
+  const wrapD = (d) => { d = ((d % n) + n) % n; return d > n / 2 ? d - n : d; };
+  const radii = () => { const w = orbit.clientWidth; return [Math.min(w * 0.4, 600), Math.min(w * 0.45, 520)]; };
+
+  const layout = () => {
+    const [rx, rz] = radii();
+    cards.forEach((c, i) => {
+      const phi = wrapD(i - pos) * STEP, depth = (Math.cos(phi) + 1) / 2; // 1 = front, 0 = back
+      c.style.transform = `translate3d(${(Math.sin(phi) * rx).toFixed(1)}px,0,${((Math.cos(phi) - 1) * rz).toFixed(1)}px) rotateY(${(phi * 0.62).toFixed(4)}rad)`;
+      c.style.opacity = (0.15 + 0.85 * depth ** 1.6).toFixed(3);
+      c.style.filter = depth > 0.995 ? 'none' : `brightness(${(0.45 + 0.55 * depth).toFixed(2)}) blur(${((1 - depth) * 2.5).toFixed(1)}px)`;
+    });
+  };
+
+  const setFront = (k) => {
+    cards.forEach((c, i) => { const on = i === k; c.classList.toggle('front', on); c.inert = !on; c.setAttribute('aria-hidden', String(!on)); });
+    tabs.forEach((t, i) => { const on = i === k; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+    dots.forEach((d) => d.classList.remove('on'));
+    void tabList.offsetWidth; // restart the progress fill
+    dots[k].classList.add('on');
+    const t = tabs[k];
+    tabList.scrollTo({ left: t.offsetLeft - (tabList.clientWidth - t.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+  };
+
+  const goTo = (target) => {
+    const from = pos, delta = target - from, t0 = performance.now(), dur = reduce ? 0 : 1100;
+    cancelAnimationFrame(anim);
+    animating = true; elapsed = 0;
+    setFront(((Math.round(target) % n) + n) % n);
+    const step = (now) => {
+      const k = dur ? Math.min(1, (now - t0) / dur) : 1;
+      const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+      pos = from + delta * e;
+      layout();
+      if (k < 1) anim = requestAnimationFrame(step); else animating = false;
     };
-    card.addEventListener('click', (e) => {
-        if (e.target.closest('a')) return;
-        flip();
+    anim = requestAnimationFrame(step);
+  };
+  const goIndex = (k) => { const r = Math.round(pos); goTo(r + wrapD(k - r)); };
+
+  const updatePaused = () => {
+    paused = reduce || hover || focusIn || dragging || !inView || document.hidden;
+    orbit.classList.toggle('paused', paused);
+  };
+  let last = performance.now();
+  const tick = (now) => {
+    const dt = now - last; last = now;
+    if (!paused && !animating) { elapsed += dt; if (elapsed >= DWELL) goTo(Math.round(pos) + 1); }
+    requestAnimationFrame(tick);
+  };
+
+  orbit.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { hover = true; updatePaused(); } });
+  orbit.addEventListener('pointerleave', () => { hover = false; updatePaused(); });
+  const xp = document.querySelector('.xp');
+  xp.addEventListener('focusin', () => { focusIn = true; updatePaused(); });
+  xp.addEventListener('focusout', (e) => { if (!xp.contains(e.relatedTarget)) { focusIn = false; updatePaused(); } });
+  document.addEventListener('visibilitychange', updatePaused);
+  new IntersectionObserver(([en]) => { inView = en.isIntersecting; updatePaused(); }, { threshold: 0.3 }).observe(orbit);
+
+  // drag / swipe to spin; a tap on a side card brings it to the front
+  let downX = 0, downPos = 0, moved = false;
+  orbit.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0) return;
+    dragging = true; moved = false; downX = e.clientX; downPos = pos;
+    cancelAnimationFrame(anim); animating = false;
+    orbit.setPointerCapture(e.pointerId);
+    orbit.classList.add('dragging'); updatePaused();
+  });
+  orbit.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - downX;
+    if (Math.abs(dx) > 6) moved = true;
+    pos = downPos - dx / (radii()[0] * 0.9);
+    layout();
+  });
+  const release = (e) => {
+    if (!dragging) return;
+    dragging = false; orbit.classList.remove('dragging'); updatePaused();
+    if (!moved) {
+      const r = cards.find((c) => c.classList.contains('front')).getBoundingClientRect();
+      if (e.clientX < r.left) return goTo(Math.round(pos) - 1);
+      if (e.clientX > r.right) return goTo(Math.round(pos) + 1);
+    }
+    const dx = e.clientX - downX;
+    goTo(Math.abs(dx) > 40 ? (dx < 0 ? Math.max(Math.ceil(pos - 1e-6), Math.round(downPos) + 1) : Math.min(Math.floor(pos + 1e-6), Math.round(downPos) - 1)) : Math.round(pos));
+  };
+  orbit.addEventListener('pointerup', release);
+  orbit.addEventListener('pointercancel', release);
+
+  document.querySelectorAll('.arrow-btn').forEach((b) => b.addEventListener('click', () => goTo(Math.round(pos) + +b.dataset.step)));
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => goIndex(i));
+    t.addEventListener('keydown', (e) => {
+      const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+      if (d) { e.preventDefault(); const k = (i + d + n) % n; goIndex(k); tabs[k].focus(); }
     });
-    card.addEventListener('keydown', (e) => {
-        if (e.target !== card) return;
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            flip();
-        }
+  });
+  addEventListener('resize', layout);
+  layout(); setFront(0); updatePaused(); requestAnimationFrame(tick);
+
+  /* project cards: 3D tilt + spotlight; skills: spotlight */
+  if (finePointer && !reduce) {
+    document.querySelectorAll('[data-tilt]').forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        card.classList.add('tracking');
+        card.style.setProperty('--ry', ((x - 0.5) * 7).toFixed(2) + 'deg');
+        card.style.setProperty('--rx', ((0.5 - y) * 6).toFixed(2) + 'deg');
+        card.style.setProperty('--px', (x * 100).toFixed(1) + '%');
+        card.style.setProperty('--py', (y * 100).toFixed(1) + '%');
+      });
+      card.addEventListener('pointerleave', () => {
+        card.classList.remove('tracking');
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
     });
-});
-
-// HAMBURGER MENU
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.querySelector('.nav-links');
-
-const setMenu = (open) => {
-    navToggle.classList.toggle('open', open);
-    navMenu.classList.toggle('open', open);
-    navToggle.setAttribute('aria-expanded', open);
-};
-
-navToggle.addEventListener('click', () => {
-    setMenu(!navMenu.classList.contains('open'));
-});
-
-navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => setMenu(false));
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setMenu(false);
-});
-
-document.addEventListener('click', (e) => {
-    if (navMenu.classList.contains('open') && !e.target.closest('nav')) setMenu(false);
-});
-
-// Close the mobile menu if the viewport grows past the phone breakpoint
-window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
-    if (e.matches) setMenu(false);
-});
-
-// SCROLL REVEAL — repeats every time you enter/leave a section
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.classList.add('visible');
-            }, i * 100);
-        } else {
-            entry.target.classList.remove('visible');
-        }
+  }
+  if (finePointer) {
+    document.querySelectorAll('[data-glow]').forEach((box) => {
+      box.addEventListener('pointermove', (e) => {
+        const r = box.getBoundingClientRect();
+        box.style.setProperty('--px', (e.clientX - r.left) + 'px');
+        box.style.setProperty('--py', (e.clientY - r.top) + 'px');
+      });
     });
-}, { threshold: 0.1 });
+  }
 
-setTimeout(() => {
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}, 100);
+  /* skills: a soft wave lights the chips when the bento scrolls into view */
+  if (!reduce && 'IntersectionObserver' in window) {
+    const chipIo = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        chipIo.unobserve(en.target);
+        en.target.querySelectorAll('.chip').forEach((c, i) => {
+          setTimeout(() => c.classList.add('lit'), 300 + i * 90);
+          setTimeout(() => c.classList.remove('lit'), 900 + i * 90);
+        });
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('.bx').forEach((b) => chipIo.observe(b));
+  }
 
-// ACTIVE NAV LINK ON SCROLL
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-links a');
-
-const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            const id = entry.target.getAttribute('id');
-            const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
-            if (activeLink) activeLink.classList.add('active');
-        }
-    });
-}, { threshold: 0.5 });
-
-sections.forEach(section => navObserver.observe(section));
+  /* contact form: post to Formspree without leaving the page */
+  const toast = document.querySelector('.toast');
+  const showToast = (msg) => {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3200);
+  };
+  const form = document.querySelector('.form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error(res.status);
+      form.reset();
+      showToast('// Message sent successfully');
+    } catch (_) {
+      showToast('// Something went wrong — please try again');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();

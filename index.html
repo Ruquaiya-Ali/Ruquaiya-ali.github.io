@@ -1,431 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruquaiya | Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ruquaiya Ali | Portfolio</title>
+<meta name="description" content="Ruquaiya Ali — AI Product Manager at Skrypt Health and Automation Engineering student at McMaster University, building where engineering, AI, product and business meet.">
+<meta name="theme-color" content="#030208">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Outfit:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
 </head>
-
-
 <body>
 
-<div class="bg-orbs">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="orb orb-4"></div>
-    <div class="orb orb-5"></div>
-    <div class="orb orb-6"></div>
-    <div class="orb orb-7"></div>
-    <div class="orb orb-8"></div>
-    <div class="orb orb-9"></div>
-</div>
+<div class="progress" aria-hidden="true"></div>
+<div class="ambient" aria-hidden="true"><i class="am-1"></i><i class="am-2"></i><i class="am-3"></i><i class="am-4"></i><div class="ambient-grid"></div></div>
+<div class="grain" aria-hidden="true"></div>
 
-    <nav>
-        <div class="nav-logo">Ruquaiya</div>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#experience">EXPERIENCE</a></li>
-            <li><a href="#projects">PROJECTS</a></li>
-            <li><a href="#skills">SKILLS</a></li>
-            <li><a href="#contact">CONTACT</a></li>
-        </ul>
-        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
+<!-- ============ NAV ============ -->
+<header>
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="#top"><span class="brand-dot" aria-hidden="true"></span>Ruquaiya</a>
+    <ul class="nav-links">
+      <li aria-hidden="true" class="nav-ind"></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Let's talk</a>
+    <span class="nav-here" aria-hidden="true">// home</span>
+    <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="menu" id="menu" hidden>
+    <a href="#about">About <span>01</span></a>
+    <a href="#experience">Experience <span>02</span></a>
+    <a href="#projects">Projects <span>03</span></a>
+    <a href="#skills">Skills <span>04</span></a>
+    <a href="#contact">Contact <span>05</span></a>
+  </div>
+</header>
 
-<section id="about">
-    <div class="hero-inner">
-        <div class="hero-content">
-            <p class="hero-eyebrow reveal">// McMaster University</p>
-            <h1 class="hero-name reveal" data-text="About Me">About Me</h1>
-            <p class="hero-tagline reveal">
-                Hi, I'm <span>Ruquaiya Ali</span> — an Automation Engineering Technology student at McMaster University. My program includes over 750 hours of hands-on lab experience across core automation engineering courses, giving me real, practical skills in control systems, robotics, automation, and AI. My program also emphasizes business acumen alongside technical training. I'm passionate about the intersection of technology and business, and I'm actively building toward high-impact roles in technical sales, solutions engineering, product management, and business development — where deep technical knowledge meets real commercial value.
-            </p>
-        </div>
+<main id="top">
 
-        <div class="hero-credentials">
-            <div class="credential-card reveal">
-                <div>
-                    <p class="credential-label">Bachelor of Technology</p>
-                    <p class="credential-title">// Automation Engineering</p>
-                    <p class="credential-school">McMaster University</p>
-                </div>
-            </div>
-            <div class="credential-card reveal">
-                <div>
-                    <p class="credential-label">Advanced Diploma</p>
-                    <p class="credential-title">// Electrical Engineering</p>
-                    <p class="credential-school">McMaster University</p>
-                </div>
-            </div>
-            <div class="credential-card reveal">
-                <div>
-                    <p class="credential-label">Certificate</p>
-                    <p class="credential-title">// Business Management</p>
-                    <p class="credential-school">McMaster University</p>
-                </div>
-            </div>
-            <div class="credential-card reveal">
-                <div>
-                    <p class="credential-label">Accreditation</p>
-                    <p class="credential-title">// ACBSP Accredited</p>
-                    <p class="credential-school">McMaster University</p>
-                </div>
-            </div>
-        </div>
+<!-- ============ HERO ============ -->
+<section class="hero" id="home" aria-label="Introduction">
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+  <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="hero-grid-hot" aria-hidden="true"></div>
+  <div class="hero-spot" aria-hidden="true"></div>
+  <div class="hero-fade" aria-hidden="true"></div>
+
+  <div class="wrap hero-inner">
+    <div>
+      <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>// McMaster University · Automation Engineering</p>
+      <h1 class="name" aria-label="Ruquaiya Ali">
+        <span class="ln" aria-hidden="true"><span class="ch" style="--i:0">R</span><span class="ch" style="--i:1">u</span><span class="ch" style="--i:2">q</span><span class="ch" style="--i:3">u</span><span class="ch" style="--i:4">a</span><span class="ch" style="--i:5">i</span><span class="ch" style="--i:6">y</span><span class="ch" style="--i:7">a</span></span>
+        <span class="ln glow" aria-hidden="true"><span class="ali">Ali.</span></span>
+      </h1>
+      <p class="ticker">I build where <span class="tw on">engineering</span>, <span class="tw">AI</span>, <span class="tw">product</span> and <span class="tw">business</span> meet.</p>
+      <div class="ctas">
+        <a class="btn btn-p" href="#projects">See my work
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-g" href="#contact">Get in touch</a>
+      </div>
+      <div class="socials">
+        <a class="icon-btn" href="https://linkedin.com/in/ruquaiya-ali" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a class="icon-btn" href="https://github.com/ruquaiya-ali" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
+        </a>
+      </div>
     </div>
+
+    <aside class="console" aria-label="Current status">
+      <div class="c-bar" aria-hidden="true"><i></i><i></i><i></i><span>ruquaiya@portfolio: ~/status</span></div>
+      <div class="c-body">
+        <p class="c-cmd c-line" style="--i:0"><span><b>$</b> whoami</span><span class="c-v">Ruquaiya Ali</span></p>
+        <p class="c-line" style="--i:1"><span class="c-k">now</span><span class="c-v">AI Product Manager<small>@ Skrypt Health · Aug. 2026 – Present</small></span></p>
+        <p class="c-line" style="--i:2"><span class="c-k">also</span><span class="c-v">BD &amp; Engineering Processes Intern<small>@ Siemens Canada · June 2026 – Present</small></span></p>
+        <p class="c-line" style="--i:3"><span class="c-k">study</span><span class="c-v">B.Tech Automation Engineering<small>@ McMaster University</small></span></p>
+        <div class="c-line" style="--i:4"><span class="c-k">open_to</span>
+          <div class="c-chips"><span>technical sales</span><span>solutions engineering</span><span>product management</span><span>business development</span></div>
+        </div>
+        <p class="c-cmd c-line" style="--i:5"><span><b>$</b><span class="caret" aria-hidden="true"></span></span></p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">SCROLL<i></i></div>
 </section>
 
-<section id="experience">
-    <div class="experience-wrap">
-                <p class="section-eyebrow reveal">// where i've worked</p>
-        <h2 class="section-title reveal" data-text="Experience">Experience</h2>
-        <div class="experience-grid">
-            <div class="experience-item reveal">
-                <div class="experience-header">
-                    <div class="experience-meta">
-                        <h3 class="project-name">// Skrypt Health</h3>
-                        <p class="experience-role">AI Product Manager</p>
-                        <p class="credential-school">[ Remote ]</p>
-                        <p class="credential-label experience-date">Aug. 2026 – Present</p>
-                    </div>
-                </div>
-                <ul class="experience-bullets">
-                    <li>Drive product feature scoping, requirements gathering, and user feedback synthesis at an early-stage AI healthcare startup, working directly with the founding team</li>
-                    <li>Build and maintain internal automations and workflow integrations across Skrypt's systems</li>
-                    <li>Support UI quality and visual consistency across product interfaces, landing pages, and marketing assets</li>
-                    <li>Execute scoped lab initiatives with defined deliverables, timelines, and budgets</li>
-                    <li>Document work and deliver progress updates across all active workstreams</li>
-                </ul>
-                <div class="project-tags">
-                    <span class="tag">Product Management</span>
-                    <span class="tag">AI</span>
-                    <span class="tag">Automation</span>
-                    <span class="tag">UI/UX</span>
-                </div>
-                <div class="experience-footer">
-                    <div class="company-brand">
-                        <svg class="brand-logo brand-logo-skrypt" viewBox="0 0 100 100" shape-rendering="geometricPrecision" role="img" aria-label="Skrypt Health" xmlns="http://www.w3.org/2000/svg">
-                            <g fill="#ffffff">
-                                <path transform="translate(-1 -2)" d="M30 52C18 52 14 40 16 30C18 20 28 10 44 9C60 8 74 11 83 15C88 17 88.8 22.2 84 25C72 32 62 38 54 45C46 52 38 52 30 52Z"/>
-                                <path transform="rotate(180 50 50) translate(-1 -2)" d="M30 52C18 52 14 40 16 30C18 20 28 10 44 9C60 8 74 11 83 15C88 17 88.8 22.2 84 25C72 32 62 38 54 45C46 52 38 52 30 52Z"/>
-                            </g>
-                        </svg>
-                        <span class="company-brand-name">Skrypt Health</span>
-                    </div>
-                </div>
-            </div>
-            <div class="experience-item reveal">
-                <div class="experience-header">
-                    <div class="experience-meta">
-                        <h3 class="project-name">// Google Developer Groups</h3>
-                        <p class="experience-role">Finance Coordinator / Hackathon Organizer</p>
-                        <p class="credential-school">[ Hybrid ]</p>
-                        <p class="credential-label experience-date">July 2025 – Present</p>
-                    </div>
-                </div>
-                <ul class="experience-bullets">
-                    <li>Manage a $10,000+ CAD annual budget, tracking expenses and cash flow across hackathons, workshops, and community events</li>
-                    <li>Secured sponsorships from tech companies and industry professionals by building and maintaining strategic relationships</li>
-                    <li>Coordinate financial planning and reporting for one of McMaster's most active tech communities</li>
-                    <li>Support event logistics and operations for a student-led organization running recurring technical programming</li>
-                </ul>
-                <div class="project-tags">
-                    <span class="tag">Finance</span>
-                    <span class="tag">Event Management</span>
-                    <span class="tag">Sponsorships</span>
-                    <span class="tag">Community</span>
-                </div>
-                <div class="experience-footer">
-                    <div class="company-brand">
-                        <img src="images/bg-gdg.png" alt="GDG" class="company-logo brand-logo bg-gdg">
-                        <span class="company-brand-name">GDG</span>
-                    </div>
-                </div>
-            </div>
-            <div class="experience-item reveal">
-                <div class="experience-header">
-                    <div class="experience-meta">
-                        <h3 class="project-name">// Siemens Canada</h3>
-                        <p class="experience-role">Business Development & Engineering Processes Intern</p>
-                        <p class="credential-school">[ Hybrid ]</p>
-                        <p class="credential-label experience-date">June 2026 – Aug. 2026</p>
-                    </div>
-                </div>
-                <ul class="experience-bullets">
-                    <li>Built an AI-assisted RFx screening workflow with internal LLM tools, cutting a weekly 16-hour procurement research task down to 3 hours — a reduction of more than 80%</li>
-                    <li>Developed a bot using Siemens internal AI tools to scan utility Integrated Resource Plans (IRPs) for early signals of client capital plans, supporting proactive business development</li>
-                    <li>Supported GSW and PTI business development for utility and grid-operator clients, tracking opportunities in Salesforce</li>
-                    <li>Directly reported to the Head of Grid Software (Canada) & President of Siemens Advanta</li>
-                </ul>
-                <div class="project-tags">
-                    <span class="tag">AI Automation</span>
-                    <span class="tag">Business Development</span>
-                    <span class="tag">Salesforce</span>
-                    <span class="tag">LLM Tools</span>
-                </div>
-                <div class="experience-footer">
-                    <img src="images/siemens-logo.webp" alt="Siemens" class="company-logo">
-                </div>
-            </div>
-            <div class="experience-item reveal">
-                <div class="experience-header">
-                    <div class="experience-meta">
-                        <h3 class="project-name">// TELUS Digital AI</h3>
-                        <p class="experience-role">Media Search Analyst, iOS</p>
-                        <p class="credential-school">[ Remote ]</p>
-                        <p class="credential-label experience-date">May 2025 – July 2025</p>
-                    </div>
-                </div>
-                <ul class="experience-bullets">
-                    <li>Evaluated 2,000+ AI-generated search results across music, books, podcasts, and video for relevance and ranking accuracy</li>
-                    <li>Reviewed app-store metadata and query-result alignment to help identify search failure modes</li>
-                    <li>Identified and flagged recurring AI ranking errors, helping improve search result accuracy across media categories</li>
-                    <li>Consistently hit daily evaluation targets while maintaining quality in a fully remote, high-volume contract role</li>
-                </ul>
-                <div class="project-tags">
-                    <span class="tag">AI Evaluation</span>
-                    <span class="tag">Data Quality</span>
-                    <span class="tag">Search Ranking</span>
-                    <span class="tag">Freelance</span>
-                </div>
-                <div class="experience-footer">
-                    <img src="images/telus-logo.webp" alt="TELUS Digital" class="company-logo company-logo-telus">
-                </div>
-            </div>
-        </div>
+<!-- ============ STATS ============ -->
+<section class="stats" id="stats" aria-label="By the numbers">
+  <div class="wrap stats-grid">
+    <div class="stat rv">
+      <p class="stat-k">// lab</p>
+      <p class="stat-n" data-count="750" data-suffix="+">750+</p>
+      <p class="stat-l">hours of hands-on <b>automation engineering lab</b> work</p>
     </div>
+    <div class="stat rv">
+      <p class="stat-k">// siemens · 16h → 3h</p>
+      <p class="stat-n" data-count="80" data-suffix="%+">80%+</p>
+      <p class="stat-l">cut in weekly <b>RFx research time</b> with an AI-assisted workflow</p>
+    </div>
+    <div class="stat rv">
+      <p class="stat-k">// telus digital ai</p>
+      <p class="stat-n" data-count="2000" data-suffix="+">2,000+</p>
+      <p class="stat-l"><b>AI-generated search results</b> evaluated for relevance &amp; ranking</p>
+    </div>
+    <div class="stat rv">
+      <p class="stat-k">// gdg mcmaster</p>
+      <p class="stat-n" data-count="10" data-prefix="$" data-suffix="K+">$10K+</p>
+      <p class="stat-l">CAD <b>annual budget</b> managed across events &amp; hackathons</p>
+    </div>
+  </div>
 </section>
 
-<section id="projects">
-    <div class="projects-wrap">
-
-        <p class="section-eyebrow reveal">// what i've built</p>
-        <h2 class="section-title reveal" data-text="Projects">Projects</h2>
-
-        <div class="projects-grid">
-
-           <div class="flip-card reveal">
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <div class="project-card-top">
-                <span class="project-status">Live</span>
-            </div>
-           <div class="project-media">
-                <video autoplay muted loop playsinline preload="metadata" aria-label="TruthLens demo">
-                    <source src="truthlens-demo.webm" type="video/webm">
-                </video>
-            </div>
-            <h3 class="project-name">// TruthLens</h3>
-            <div class="project-tags">
-                <span class="tag">Python</span>
-                <span class="tag">React</span>
-                <span class="tag">Claude API</span>
-                <span class="tag">Prompt Engineering</span>
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">JavaScript</span>
-            </div>
-            <p class="back-hint">// click to see more</p>
-        </div>
-        <div class="flip-card-back">
-            <h3 class="project-name">// TruthLens</h3>
-            <p class="back-desc">AI-powered Chrome extension that analyzes news articles for political bias, credibility, emotional manipulation, and rhetorical tactics using the Claude API and a FastAPI backend deployed on Render.</p>
-            <div class="back-tags">
-                <span class="tag">Python</span>
-                <span class="tag">FastAPI</span>
-                <span class="tag">React</span>
-                <span class="tag">Claude API</span>
-                <span class="tag">Prompt Engineering</span>
-                <span class="tag">Chrome Extension</span>
-                <span class="tag">REST API</span>
-                <span class="tag">Render</span>
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">JavaScript</span>
-            </div>
-            <div class="back-highlights">
-                <p class="back-highlights-label">// Highlights</p>
-                <ul class="back-highlights-list">
-                    <li>Deployed live backend API on Render</li>
-                    <li>Engineered Claude prompts for reliable structured JSON output</li>
-                    <li>Built and shipped a real Chrome Extension (Manifest V3)</li>
-                    <li>Implemented rate limiting and CORS security</li>
-                    <li>Full error handling with automatic retry logic</li>
-                </ul>
-            </div>
-            <a href="https://github.com/Ruquaiya-Ali/TruthLens" target="_blank" class="back-hint back-link" rel="noopener">// View on GitHub </a>
-        </div>
+<!-- ============ ABOUT ============ -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="sh rv">
+      <div><p class="sh-idx">01 — about</p><h2>About me</h2></div>
     </div>
-</div>
 
-           <div class="flip-card reveal">
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <div class="project-card-top">
-                <span class="project-status">Academic</span>
-            </div>
-            <img class="project-image" src="images/EMS.Preview.jpg" alt="Employee Management System Preview" style="object-position: right top;" loading="lazy">
-            <h3 class="project-name">// Employee Management System</h3>
-            <div class="project-tags">
-                <span class="tag">C++</span>
-                <span class="tag">OOP</span>
-                <span class="tag">Inheritance</span>
-                <span class="tag">Polymorphism</span>
-                <span class="tag">File I/O</span>
-            </div>
-            <p class="back-hint">// click to see more</p>
-        </div>
-        <div class="flip-card-back">
-            <h3 class="project-name">// Employee Management System</h3>
-            <p class="back-desc">A C++ OOP console application that manages employees, managers, and interns using inheritance, polymorphism, and file I/O. Built as a group project at McMaster University.</p>
-            <div class="back-tags">
-                <span class="tag">C++</span>
-                <span class="tag">OOP</span>
-                <span class="tag">Inheritance</span>
-                <span class="tag">Polymorphism</span>
-                <span class="tag">File I/O</span>
-            </div>
-            <div class="back-highlights">
-                <p class="back-highlights-label">// Highlights</p>
-                <ul class="back-highlights-list">
-                    <li>Designed class hierarchy with Employee, Manager, and Intern types</li>
-                    <li>Applied polymorphism for dynamic dispatch across employee types</li>
-                    <li>Implemented file I/O for persistent data storage</li>
-                    <li>Collaborated in a group project for ENGTECH 1PR3</li>
-                </ul>
-            </div>
-            <a href="https://github.com/ruquaiya-ali/Employee-Management-System" target="_blank" class="back-hint back-link" rel="noopener">// View on GitHub </a>
-        </div>
+    <p class="statement rv">Hi, I'm Ruquaiya. I work where <span class="grad-text">deep technical knowledge</span> <span class="dim">meets</span> <span class="grad-text">real commercial value.</span></p>
+
+    <div class="about-grid">
+      <p class="about-copy rv">Hi, I'm <strong>Ruquaiya Ali</strong> — an Automation Engineering Technology student at McMaster University. My program includes over <strong>750 hours of hands-on lab experience</strong> across core automation engineering courses, giving me real, practical skills in control systems, robotics, automation, and AI. My program also emphasizes business acumen alongside technical training. I'm passionate about the intersection of technology and business, and I'm actively building toward high-impact roles in <strong>technical sales, solutions engineering, product management, and business development</strong> — where deep technical knowledge meets real commercial value.</p>
+
+      <div class="spec rv" role="table" aria-label="Credentials">
+        <div class="spec-head" role="row"><span role="columnheader"><b>SPEC SHEET</b> / CREDENTIALS</span><span role="columnheader">04 ITEMS</span></div>
+        <div class="spec-row" role="row"><span class="spec-type" role="cell">Bachelor of Technology</span><span class="spec-title" role="cell">Automation Engineering</span><span class="spec-school" role="cell">McMaster</span></div>
+        <div class="spec-row" role="row"><span class="spec-type" role="cell">Advanced Diploma</span><span class="spec-title" role="cell">Electrical Engineering</span><span class="spec-school" role="cell">McMaster</span></div>
+        <div class="spec-row" role="row"><span class="spec-type" role="cell">Certificate</span><span class="spec-title" role="cell">Business Management</span><span class="spec-school" role="cell">McMaster</span></div>
+        <div class="spec-row" role="row"><span class="spec-type" role="cell">Accreditation</span><span class="spec-title" role="cell">ACBSP Accredited</span><span class="spec-school" role="cell">McMaster</span></div>
+      </div>
     </div>
-</div>
-
-
-        </div>
-    </div>
+  </div>
 </section>
 
-<section id="skills">
-    <div class="skills-wrap">
-
-        <p class="section-eyebrow reveal">// what i work with</p>
-        <h2 class="section-title reveal" data-text="Skills">Skills</h2>
-
-        <div class="skills-grid">
-
-            <div class="skill-card reveal">
-                <div class="skill-card-top">
-                    <h3 class="skill-name">// Programming</h3>
-                </div>
-                <div class="skill-tags">
-                    <span class="tag">C++</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">OOP</span>
-                    <span class="tag">HTML</span>
-                    <span class="tag">CSS</span>
-                    <span class="tag">JavaScript</span>
-                    <span class="tag">Prompt Engineering</span>
-                    <span class="tag">LLM Integration</span>
-                    <span class="tag">Automation</span>
-                </div>
-            </div>
-
-            <div class="skill-card reveal">
-                <div class="skill-card-top">
-                    <h3 class="skill-name">// Engineering</h3>
-                </div>
-                <div class="skill-tags">
-                    <span class="tag">Circuit Analysis</span>
-                    <span class="tag">Multisim</span>
-                    <span class="tag">Arduino</span>
-                    <span class="tag">AutoCAD</span>
-                    <span class="tag">AutoDesk Inventor</span>
-                    <span class="tag">Analytical Chemistry</span>
-                </div>
-            </div>
-
-            <div class="skill-card reveal">
-                <div class="skill-card-top">
-                    <h3 class="skill-name">// Productivity</h3>
-                </div>
-                <div class="skill-tags">
-                    <span class="tag">Microsoft Excel</span>
-                    <span class="tag">Microsoft Word</span>
-                    <span class="tag">Microsoft PowerPoint</span>
-                    <span class="tag">Salesforce</span>
-                    <span class="tag">Product Management</span>
-                    <span class="tag">UI/UX</span>
-                    <span class="tag">AI</span>
-                </div>
-            </div>
-
-            <div class="skill-card reveal skill-card-soon">
-                <div class="skill-card-top">
-                    <h3 class="skill-name">// Coming Soon</h3>
-                </div>
-                <div class="skill-tags">
-                    <span class="tag">More...</span>
-                </div>
-            </div>
-
-        </div>
+<!-- ============ EXPERIENCE ============ -->
+<section class="block" id="experience">
+  <div class="wrap">
+    <div class="sh rv">
+      <div><p class="sh-idx">02 — where i've worked</p><h2>Experience</h2></div>
+      <p class="sh-note">From AI healthcare product to grid software business development.</p>
     </div>
+
+    <div class="xp rv">
+      <div class="xp-controls">
+        <div class="xp-list" role="tablist" aria-label="Roles">
+          <button class="xp-tab" role="tab" id="t-skrypt" aria-controls="p-skrypt" aria-selected="true"><span class="xp-num">01</span><span class="xp-co"><span class="full">Skrypt Health</span><span class="short">Skrypt</span></span></button>
+          <button class="xp-tab" role="tab" id="t-siemens" aria-controls="p-siemens" aria-selected="false" tabindex="-1"><span class="xp-num">02</span><span class="xp-co"><span class="full">Siemens Canada</span><span class="short">Siemens</span></span></button>
+          <button class="xp-tab" role="tab" id="t-gdg" aria-controls="p-gdg" aria-selected="false" tabindex="-1"><span class="xp-num">03</span><span class="xp-co"><span class="full">Google Developer Groups</span><span class="short">GDG</span></span></button>
+          <button class="xp-tab" role="tab" id="t-telus" aria-controls="p-telus" aria-selected="false" tabindex="-1"><span class="xp-num">04</span><span class="xp-co"><span class="full">TELUS Digital AI</span><span class="short">TELUS</span></span></button>
+        </div>
+        <div class="xp-arrows">
+          <button class="arrow-btn" type="button" data-step="-1" aria-label="Previous role"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+          <button class="arrow-btn" type="button" data-step="1" aria-label="Next role"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+
+      <div class="orbit" aria-roledescription="carousel" aria-label="Experience, rotates automatically; hover or focus to pause">
+        <div class="orbit-floor" aria-hidden="true"></div>
+        <div class="orbit-ring">
+        <!-- Skrypt Health -->
+        <article class="xp-panel" role="tabpanel" id="p-skrypt" aria-labelledby="t-skrypt">
+          <div class="xp-top">
+            <div>
+              <div class="xp-logo">
+                <svg viewBox="13.82 3.85 72.36 92.3" role="img" aria-label="Skrypt Health"><path fill="#fafafa" d="M22 49C8 27 22 5 44 4C60 3 74 7 84 14C88 17 86 21 82 23C72 27 64 33 58 40C50 50 33 54 22 49Z"/><path fill="#fafafa" d="M78 51C92 73 78 95 56 96C40 97 26 93 16 86C12 83 14 79 18 77C28 73 36 67 42 60C50 50 67 46 78 51Z"/></svg>
+              </div>
+              <h3 class="xp-role">AI Product Manager</h3>
+              <p class="xp-meta"><b>Skrypt Health</b><span>[ Remote ]</span><span>Aug. 2026 – Present</span></p>
+            </div>
+            <div class="xp-metric"><p class="xp-metric-n grad-text">Founding team</p><p class="xp-metric-l">Works directly with the founders of an early-stage AI healthcare startup</p></div>
+          </div>
+          <ul class="xp-bullets">
+            <li>Drive product feature scoping, requirements gathering, and user feedback synthesis at an early-stage AI healthcare startup, working directly with the founding team</li>
+            <li>Built and shipped a demo-to-one-pager follow-up automation: when a client books a demo, meeting notes are captured through the Wispr Flow MCP and filled into a ready-made template covering everything the client and founder discussed, then posted to Slack alongside a drafted follow-up email — both revisable just by replying in the thread</li>
+            <li>Build and maintain internal automations and workflow integrations across Skrypt's systems</li>
+            <li>Support UI quality and visual consistency across product interfaces, landing pages, and marketing assets</li>
+            <li>Execute scoped lab initiatives with defined deliverables, timelines, and budgets</li>
+            <li>Document work and deliver progress updates across all active workstreams</li>
+          </ul>
+          <div class="tags"><span class="tag">Product Management</span><span class="tag">AI</span><span class="tag">Automation</span><span class="tag">UI/UX</span></div>
+        </article>
+
+        <!-- Siemens -->
+        <article class="xp-panel" role="tabpanel" id="p-siemens" aria-labelledby="t-siemens">
+          <div class="xp-top">
+            <div>
+              <div class="xp-logo"><img class="wordmark" src="images/siemens-logo.webp" alt="Siemens"></div>
+              <h3 class="xp-role">Business Development &amp; Engineering Processes Intern</h3>
+              <p class="xp-meta"><b>Siemens Canada</b><span>[ Hybrid ]</span><span>June 2026 – Present</span></p>
+            </div>
+            <div class="xp-metric"><p class="xp-metric-n grad-text">16h → 3h</p><p class="xp-metric-l">Weekly RFx research time — a reduction of more than 80%</p></div>
+          </div>
+          <ul class="xp-bullets">
+            <li>Built an AI-assisted RFx screening workflow with internal LLM tools, cutting a weekly 16-hour procurement research task down to 3 hours — a reduction of more than 80%</li>
+            <li>Developed a bot using Siemens internal AI tools to scan utility Integrated Resource Plans (IRPs) for early signals of client capital plans, supporting proactive business development</li>
+            <li>Supported GSW and PTI business development for utility and grid-operator clients, tracking opportunities in Salesforce</li>
+            <li>Directly reported to the Head of Grid Software (Canada) &amp; President of Siemens Advanta</li>
+          </ul>
+          <div class="tags"><span class="tag">AI Automation</span><span class="tag">Business Development</span><span class="tag">Salesforce</span><span class="tag">LLM Tools</span></div>
+        </article>
+
+        <!-- GDG -->
+        <article class="xp-panel" role="tabpanel" id="p-gdg" aria-labelledby="t-gdg">
+          <div class="xp-top">
+            <div>
+              <div class="xp-logo"><img class="tall" src="images/bg-gdg.png" alt="Google Developer Groups"></div>
+              <h3 class="xp-role">Finance Coordinator / Hackathon Organizer</h3>
+              <p class="xp-meta"><b>Google Developer Groups</b><span>[ Hybrid ]</span><span>July 2025 – Present</span></p>
+            </div>
+            <div class="xp-metric"><p class="xp-metric-n grad-text">$10K+</p><p class="xp-metric-l">CAD annual budget managed</p></div>
+          </div>
+          <ul class="xp-bullets">
+            <li>Manage a $10,000+ CAD annual budget, tracking expenses and cash flow across hackathons, workshops, and community events</li>
+            <li>Secured sponsorships from tech companies and industry professionals by building and maintaining strategic relationships</li>
+            <li>Coordinate financial planning and reporting for one of McMaster's most active tech communities</li>
+            <li>Support event logistics and operations for a student-led organization running recurring technical programming</li>
+          </ul>
+          <div class="tags"><span class="tag">Finance</span><span class="tag">Event Management</span><span class="tag">Sponsorships</span><span class="tag">Community</span></div>
+        </article>
+
+        <!-- TELUS -->
+        <article class="xp-panel" role="tabpanel" id="p-telus" aria-labelledby="t-telus">
+          <div class="xp-top">
+            <div>
+              <div class="xp-logo"><img class="telus" src="images/telus-logo.webp" alt="TELUS Digital"></div>
+              <h3 class="xp-role">Media Search Analyst, iOS</h3>
+              <p class="xp-meta"><b>TELUS Digital AI</b><span>[ Remote ]</span><span>May 2025 – July 2025</span></p>
+            </div>
+            <div class="xp-metric"><p class="xp-metric-n grad-text">2,000+</p><p class="xp-metric-l">AI-generated search results evaluated</p></div>
+          </div>
+          <ul class="xp-bullets">
+            <li>Evaluated 2,000+ AI-generated search results across music, books, podcasts, and video for relevance and ranking accuracy</li>
+            <li>Reviewed app-store metadata and query-result alignment to help identify search failure modes</li>
+            <li>Identified and flagged recurring AI ranking errors, helping improve search result accuracy across media categories</li>
+            <li>Consistently hit daily evaluation targets while maintaining quality in a fully remote, high-volume contract role</li>
+          </ul>
+          <div class="tags"><span class="tag">AI Evaluation</span><span class="tag">Data Quality</span><span class="tag">Search Ranking</span><span class="tag">Freelance</span></div>
+        </article>
+        </div>
+      </div>
+      <div class="xp-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+    </div>
+  </div>
 </section>
 
-<section id="contact">
-    <div class="contact-wrap">
-
-        <p class="section-eyebrow reveal">// get in touch</p>
-        <h2 class="section-title reveal" data-text="CONTACT">Contact</h2>
-
-        <div class="contact-inner">
-
-            <form class="contact-form reveal" action="https://formspree.io/f/xojkqzwk" method="POST">
-                <div class="form-group">
-                    <label class="form-label" for="cf-name">Name</label>
-                    <input id="cf-name" class="form-input" type="text" name="name" placeholder="Your name" required />
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="cf-email">Email</label>
-                    <input id="cf-email" class="form-input" type="email" name="email" placeholder="your@email.com" required />
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="cf-message">Message</label>
-                    <textarea id="cf-message" class="form-input form-textarea" name="message" placeholder="What's on your mind?" required></textarea>
-                </div>
-                <button class="btn-primary" type="submit">Send Message</button>
-            </form>
-
-            <div class="contact-links reveal">
-    <p class="section-eyebrow">// Links</p>
-    <a href="https://linkedin.com/in/ruquaiya-ali" class="contact-chip reveal" target="_blank" rel="noopener">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#c4b5fd"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-        <span class="chip-label">// LinkedIn</span>
-    </a>
-    <a href="https://github.com/ruquaiya-ali" class="contact-chip reveal" target="_blank" rel="noopener">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#c4b5fd"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
-        <span class="chip-label">// GitHub</span>
-    </a>
-</div>
-
-        </div>
+<!-- ============ PROJECTS ============ -->
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="sh rv">
+      <div><p class="sh-idx">03 — what i've built</p><h2>Projects</h2></div>
     </div>
+
+    <div class="projects">
+      <div class="rv">
+        <article class="pc" data-tilt>
+          <div class="pc-body">
+            <div class="pc-top"><span class="badge live"><span class="live-dot" aria-hidden="true"></span>Live</span><span class="pc-num">P/01</span></div>
+            <h3>TruthLens</h3>
+            <p class="pc-desc">AI-powered Chrome extension that analyzes news articles for political bias, credibility, emotional manipulation, and rhetorical tactics using the Claude API and a FastAPI backend deployed on Render.</p>
+            <div>
+              <p class="hl-label">// Highlights</p>
+              <ul class="hl">
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Deployed live backend API on Render</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Engineered Claude prompts for reliable structured JSON output</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Built and shipped a real Chrome Extension (Manifest V3)</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Implemented rate limiting and CORS security</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Full error handling with automatic retry logic</li>
+              </ul>
+            </div>
+            <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">Claude API</span><span class="tag">Prompt Engineering</span><span class="tag">Chrome Extension</span><span class="tag">REST API</span><span class="tag">Render</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+            <div class="pc-actions">
+              <a class="btn btn-g" href="https://github.com/Ruquaiya-Ali/TruthLens" target="_blank" rel="noopener">View on GitHub
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="rv">
+        <article class="pc" data-tilt>
+          <div class="pc-body">
+            <div class="pc-top"><span class="badge acad">Academic</span><span class="pc-num">P/02</span></div>
+            <h3>Employee Management System</h3>
+            <p class="pc-desc">A C++ OOP console application that manages employees, managers, and interns using inheritance, polymorphism, and file I/O. Built as a group project at McMaster University.</p>
+            <div>
+              <p class="hl-label">// Highlights</p>
+              <ul class="hl">
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Designed class hierarchy with Employee, Manager, and Intern types</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Applied polymorphism for dynamic dispatch across employee types</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Implemented file I/O for persistent data storage</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Collaborated in a group project for ENGTECH 1PR3</li>
+              </ul>
+            </div>
+            <div class="tags"><span class="tag">C++</span><span class="tag">OOP</span><span class="tag">Inheritance</span><span class="tag">Polymorphism</span><span class="tag">File I/O</span></div>
+            <div class="pc-actions">
+              <a class="btn btn-g" href="https://github.com/ruquaiya-ali/Employee-Management-System" target="_blank" rel="noopener">View on GitHub
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- ============ SKILLS ============ -->
+<section class="block" id="skills">
+  <div class="wrap">
+    <div class="sh rv">
+      <div><p class="sh-idx">04 — what i work with</p><h2>Skills</h2></div>
+    </div>
+
+    <div class="bento">
+      <div class="bx wide rv" data-glow>
+        <div class="bx-top">
+          <span class="bx-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>
+          <span class="bx-count">14 / tools</span>
+        </div>
+        <h3>Programming</h3>
+        <div class="chips"><span class="chip">C++</span><span class="chip">Python</span><span class="chip">OOP</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Prompt Engineering</span><span class="chip">LLM Integration</span><span class="chip">Claude</span><span class="chip">Automation</span><span class="chip">Automation Development</span><span class="chip">GitHub</span><span class="chip">Supabase</span><span class="chip">Vercel</span></div>
+      </div>
+      <div class="bx rv" data-glow>
+        <div class="bx-top">
+          <span class="bx-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></span>
+          <span class="bx-count">06 / tools</span>
+        </div>
+        <h3>Engineering</h3>
+        <div class="chips"><span class="chip">Circuit Analysis</span><span class="chip">Multisim</span><span class="chip">Arduino</span><span class="chip">AutoCAD</span><span class="chip">AutoDesk Inventor</span><span class="chip">Analytical Chemistry</span></div>
+      </div>
+      <div class="bx wide rv" data-glow>
+        <div class="bx-top">
+          <span class="bx-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg></span>
+          <span class="bx-count">07 / tools</span>
+        </div>
+        <h3>Productivity</h3>
+        <div class="chips"><span class="chip">Microsoft Excel</span><span class="chip">Microsoft Word</span><span class="chip">Microsoft PowerPoint</span><span class="chip">Salesforce</span><span class="chip">Product Management</span><span class="chip">UI/UX</span><span class="chip">AI</span></div>
+      </div>
+      <div class="bx soon rv" data-glow>
+        <div class="bx-top">
+          <span class="bx-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+          <span class="bx-count">loading…</span>
+        </div>
+        <h3>Coming soon</h3>
+        <div class="chips"><span class="chip">More...</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="block contact" id="contact">
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="sh-idx rv">05 — get in touch</p>
+    <h2 class="ct-head rv">Let's<br><span class="grad-text">talk.</span></h2>
+
+    <div class="ct-grid">
+      <form class="form rv" action="https://formspree.io/f/xojkqzwk" method="POST">
+        <div class="form-row">
+          <div class="field"><label for="cf-name">Name</label><input id="cf-name" type="text" name="name" placeholder="Your name" autocomplete="name" required></div>
+          <div class="field"><label for="cf-email">Email</label><input id="cf-email" type="email" name="email" placeholder="your@email.com" autocomplete="email" required></div>
+        </div>
+        <div class="field"><label for="cf-message">Message</label><textarea id="cf-message" name="message" placeholder="What's on your mind?" required></textarea></div>
+        <button class="btn btn-p" type="submit">Send Message</button>
+      </form>
+
+      <div class="links rv">
+        <a class="link-row" href="https://linkedin.com/in/ruquaiya-ali" target="_blank" rel="noopener">
+          <span class="bx-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></span>
+          <span><strong>LinkedIn</strong><small>linkedin.com/in/ruquaiya-ali</small></span>
+          <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+        <a class="link-row" href="https://github.com/ruquaiya-ali" target="_blank" rel="noopener">
+          <span class="bx-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg></span>
+          <span><strong>GitHub</strong><small>github.com/ruquaiya-ali</small></span>
+          <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <footer>
-    <p class="footer-text">Designed & Built by <span>Ruquaiya Ali</span> · 2026</p>
+  <div class="wrap foot">
+    <p>Designed &amp; Built by <strong>Ruquaiya Ali</strong> · 2026</p>
+    <a href="#top">back to top ↑</a>
+  </div>
 </footer>
 
-<script src="script.js"></script>
+<div class="toast" role="status" aria-live="polite"></div>
 
+<script src="script.js"></script>
 </body>
 </html>
