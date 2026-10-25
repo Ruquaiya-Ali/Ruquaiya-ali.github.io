@@ -86,113 +86,115 @@
   document.addEventListener('click', (e) => { if (!menu.hidden && !e.target.closest('.nav, .menu')) setMenu(false); });
   matchMedia('(min-width: 881px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
 
-  /* experience: revolving ring — cards orbit a vertical axis, auto-advancing */
-  const orbit = document.querySelector('.orbit');
-  const cards = [...orbit.querySelectorAll('.xp-panel')];
-  const tabs = [...document.querySelectorAll('.xp-tab')];
-  const tabList = document.querySelector('.xp-list');
-  const dots = [...document.querySelectorAll('.xp-dots i')];
-  const n = cards.length, STEP = (Math.PI * 2) / n, DWELL = 5500;
-  let pos = 0, anim = 0, animating = false, elapsed = 0;
-  let hover = false, focusIn = false, inView = false, dragging = false, paused = true;
-  const wrapD = (d) => { d = ((d % n) + n) % n; return d > n / 2 ? d - n : d; };
-  const radii = () => { const w = orbit.clientWidth; return [Math.min(w * 0.4, 600), Math.min(w * 0.45, 520)]; };
+  /* revolving rings (experience, skills): cards orbit a vertical axis, auto-advancing */
+  const makeRing = (root) => {
+    const orbit = root.querySelector('.orbit');
+    const cards = [...orbit.querySelector('.orbit-ring').children];
+    const tabs = [...root.querySelectorAll('[role="tab"]')];
+    const tabList = root.querySelector('[role="tablist"]');
+    const dots = [...root.querySelectorAll('.xp-dots i')];
+    const n = cards.length, STEP = (Math.PI * 2) / n, DWELL = 5500;
+    let pos = 0, anim = 0, animating = false, elapsed = 0;
+    let hover = false, focusIn = false, inView = false, dragging = false, paused = true;
+    const wrapD = (d) => { d = ((d % n) + n) % n; return d > n / 2 ? d - n : d; };
+    const radii = () => { const w = orbit.clientWidth; return [Math.min(w * 0.4, 600), Math.min(w * 0.45, 520)]; };
 
-  const layout = () => {
-    const [rx, rz] = radii();
-    cards.forEach((c, i) => {
-      const phi = wrapD(i - pos) * STEP, depth = (Math.cos(phi) + 1) / 2; // 1 = front, 0 = back
-      c.style.transform = `translate3d(${(Math.sin(phi) * rx).toFixed(1)}px,0,${((Math.cos(phi) - 1) * rz).toFixed(1)}px) rotateY(${(phi * 0.62).toFixed(4)}rad)`;
-      c.style.opacity = (0.15 + 0.85 * depth ** 1.6).toFixed(3);
-      c.style.filter = depth > 0.995 ? 'none' : `brightness(${(0.45 + 0.55 * depth).toFixed(2)}) blur(${((1 - depth) * 2.5).toFixed(1)}px)`;
-    });
-  };
-
-  const setFront = (k) => {
-    cards.forEach((c, i) => { const on = i === k; c.classList.toggle('front', on); c.inert = !on; c.setAttribute('aria-hidden', String(!on)); });
-    tabs.forEach((t, i) => { const on = i === k; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
-    dots.forEach((d) => d.classList.remove('on'));
-    void tabList.offsetWidth; // restart the progress fill
-    dots[k].classList.add('on');
-    const t = tabs[k];
-    tabList.scrollTo({ left: t.offsetLeft - (tabList.clientWidth - t.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
-  };
-
-  const goTo = (target) => {
-    const from = pos, delta = target - from, t0 = performance.now(), dur = reduce ? 0 : 1100;
-    cancelAnimationFrame(anim);
-    animating = true; elapsed = 0;
-    setFront(((Math.round(target) % n) + n) % n);
-    const step = (now) => {
-      const k = dur ? Math.min(1, (now - t0) / dur) : 1;
-      const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-      pos = from + delta * e;
-      layout();
-      if (k < 1) anim = requestAnimationFrame(step); else animating = false;
+    const layout = () => {
+      const [rx, rz] = radii();
+      cards.forEach((c, i) => {
+        const phi = wrapD(i - pos) * STEP, depth = (Math.cos(phi) + 1) / 2; // 1 = front, 0 = back
+        c.style.transform = `translate3d(${(Math.sin(phi) * rx).toFixed(1)}px,0,${((Math.cos(phi) - 1) * rz).toFixed(1)}px) rotateY(${(phi * 0.62).toFixed(4)}rad)`;
+        c.style.opacity = (0.15 + 0.85 * depth ** 1.6).toFixed(3);
+        c.style.filter = depth > 0.995 ? 'none' : `brightness(${(0.45 + 0.55 * depth).toFixed(2)}) blur(${((1 - depth) * 2.5).toFixed(1)}px)`;
+      });
     };
-    anim = requestAnimationFrame(step);
-  };
-  const goIndex = (k) => { const r = Math.round(pos); goTo(r + wrapD(k - r)); };
 
-  const updatePaused = () => {
-    paused = reduce || hover || focusIn || dragging || !inView || document.hidden;
-    orbit.classList.toggle('paused', paused);
-  };
-  let last = performance.now();
-  const tick = (now) => {
-    const dt = now - last; last = now;
-    if (!paused && !animating) { elapsed += dt; if (elapsed >= DWELL) goTo(Math.round(pos) + 1); }
-    requestAnimationFrame(tick);
-  };
+    const setFront = (k) => {
+      cards.forEach((c, i) => { const on = i === k; c.classList.toggle('front', on); c.inert = !on; c.setAttribute('aria-hidden', String(!on)); });
+      tabs.forEach((t, i) => { const on = i === k; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+      dots.forEach((d) => d.classList.remove('on'));
+      void tabList.offsetWidth; // restart the progress fill
+      dots[k].classList.add('on');
+      const t = tabs[k];
+      tabList.scrollTo({ left: t.offsetLeft - (tabList.clientWidth - t.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+    };
 
-  orbit.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { hover = true; updatePaused(); } });
-  orbit.addEventListener('pointerleave', () => { hover = false; updatePaused(); });
-  const xp = document.querySelector('.xp');
-  xp.addEventListener('focusin', () => { focusIn = true; updatePaused(); });
-  xp.addEventListener('focusout', (e) => { if (!xp.contains(e.relatedTarget)) { focusIn = false; updatePaused(); } });
-  document.addEventListener('visibilitychange', updatePaused);
-  new IntersectionObserver(([en]) => { inView = en.isIntersecting; updatePaused(); }, { threshold: 0.3 }).observe(orbit);
+    const goTo = (target) => {
+      const from = pos, delta = target - from, t0 = performance.now(), dur = reduce ? 0 : 1100;
+      cancelAnimationFrame(anim);
+      animating = true; elapsed = 0;
+      setFront(((Math.round(target) % n) + n) % n);
+      const step = (now) => {
+        const k = dur ? Math.min(1, (now - t0) / dur) : 1;
+        const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        pos = from + delta * e;
+        layout();
+        if (k < 1) anim = requestAnimationFrame(step); else animating = false;
+      };
+      anim = requestAnimationFrame(step);
+    };
+    const goIndex = (k) => { const r = Math.round(pos); goTo(r + wrapD(k - r)); };
 
-  // drag / swipe to spin; a tap on a side card brings it to the front
-  let downX = 0, downPos = 0, moved = false;
-  orbit.addEventListener('pointerdown', (e) => {
-    if (e.button !== 0) return;
-    dragging = true; moved = false; downX = e.clientX; downPos = pos;
-    cancelAnimationFrame(anim); animating = false;
-    orbit.setPointerCapture(e.pointerId);
-    orbit.classList.add('dragging'); updatePaused();
-  });
-  orbit.addEventListener('pointermove', (e) => {
-    if (!dragging) return;
-    const dx = e.clientX - downX;
-    if (Math.abs(dx) > 6) moved = true;
-    pos = downPos - dx / (radii()[0] * 0.9);
-    layout();
-  });
-  const release = (e) => {
-    if (!dragging) return;
-    dragging = false; orbit.classList.remove('dragging'); updatePaused();
-    if (!moved) {
-      const r = cards.find((c) => c.classList.contains('front')).getBoundingClientRect();
-      if (e.clientX < r.left) return goTo(Math.round(pos) - 1);
-      if (e.clientX > r.right) return goTo(Math.round(pos) + 1);
-    }
-    const dx = e.clientX - downX;
-    goTo(Math.abs(dx) > 40 ? (dx < 0 ? Math.max(Math.ceil(pos - 1e-6), Math.round(downPos) + 1) : Math.min(Math.floor(pos + 1e-6), Math.round(downPos) - 1)) : Math.round(pos));
-  };
-  orbit.addEventListener('pointerup', release);
-  orbit.addEventListener('pointercancel', release);
+    const updatePaused = () => {
+      paused = reduce || hover || focusIn || dragging || !inView || document.hidden;
+      orbit.classList.toggle('paused', paused);
+    };
+    let last = performance.now();
+    const tick = (now) => {
+      const dt = now - last; last = now;
+      if (!paused && !animating) { elapsed += dt; if (elapsed >= DWELL) goTo(Math.round(pos) + 1); }
+      requestAnimationFrame(tick);
+    };
 
-  document.querySelectorAll('.arrow-btn').forEach((b) => b.addEventListener('click', () => goTo(Math.round(pos) + +b.dataset.step)));
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => goIndex(i));
-    t.addEventListener('keydown', (e) => {
-      const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
-      if (d) { e.preventDefault(); const k = (i + d + n) % n; goIndex(k); tabs[k].focus(); }
+    orbit.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { hover = true; updatePaused(); } });
+    orbit.addEventListener('pointerleave', () => { hover = false; updatePaused(); });
+    root.addEventListener('focusin', () => { focusIn = true; updatePaused(); });
+    root.addEventListener('focusout', (e) => { if (!root.contains(e.relatedTarget)) { focusIn = false; updatePaused(); } });
+    document.addEventListener('visibilitychange', updatePaused);
+    new IntersectionObserver(([en]) => { inView = en.isIntersecting; updatePaused(); }, { threshold: 0.3 }).observe(orbit);
+
+    // drag / swipe to spin; a tap on a side card brings it to the front
+    let downX = 0, downPos = 0, moved = false;
+    orbit.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0) return;
+      dragging = true; moved = false; downX = e.clientX; downPos = pos;
+      cancelAnimationFrame(anim); animating = false;
+      orbit.setPointerCapture(e.pointerId);
+      orbit.classList.add('dragging'); updatePaused();
     });
-  });
-  addEventListener('resize', layout);
-  layout(); setFront(0); updatePaused(); requestAnimationFrame(tick);
+    orbit.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - downX;
+      if (Math.abs(dx) > 6) moved = true;
+      pos = downPos - dx / (radii()[0] * 0.9);
+      layout();
+    });
+    const release = (e) => {
+      if (!dragging) return;
+      dragging = false; orbit.classList.remove('dragging'); updatePaused();
+      if (!moved) {
+        const r = cards.find((c) => c.classList.contains('front')).getBoundingClientRect();
+        if (e.clientX < r.left) return goTo(Math.round(pos) - 1);
+        if (e.clientX > r.right) return goTo(Math.round(pos) + 1);
+      }
+      const dx = e.clientX - downX;
+      goTo(Math.abs(dx) > 40 ? (dx < 0 ? Math.max(Math.ceil(pos - 1e-6), Math.round(downPos) + 1) : Math.min(Math.floor(pos + 1e-6), Math.round(downPos) - 1)) : Math.round(pos));
+    };
+    orbit.addEventListener('pointerup', release);
+    orbit.addEventListener('pointercancel', release);
+
+    root.querySelectorAll('.arrow-btn').forEach((b) => b.addEventListener('click', () => goTo(Math.round(pos) + +b.dataset.step)));
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => goIndex(i));
+      t.addEventListener('keydown', (e) => {
+        const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (d) { e.preventDefault(); const k = (i + d + n) % n; goIndex(k); tabs[k].focus(); }
+      });
+    });
+    addEventListener('resize', layout);
+    layout(); setFront(0); updatePaused(); requestAnimationFrame(tick);
+  };
+  document.querySelectorAll('[data-ring]').forEach(makeRing);
 
   /* project cards: 3D tilt + spotlight; skills: spotlight */
   if (finePointer && !reduce) {
