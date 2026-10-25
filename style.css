@@ -43,12 +43,8 @@ a:hover{color:var(--text)}
 .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* scroll progress (scroll-driven, no JS) */
-.progress{position:fixed;inset:0 0 auto;height:2px;z-index:60;background:var(--grad);transform-origin:0 50%;transform:scaleX(0)}
-@supports (animation-timeline:scroll()){
-  .progress{animation:grow linear both;animation-timeline:scroll(root)}
-  @keyframes grow{to{transform:scaleX(1)}}
-}
+/* scroll progress — driven by script.js so page-height changes (the rings resizing) ease instead of jumping */
+.progress{position:fixed;inset:0 0 auto;height:2px;z-index:60;background:var(--grad);transform-origin:0 50%;transform:scaleX(0);will-change:transform}
 
 /* =========================================================
    AMBIENT — fixed aurora behind every section, drifts with time + scroll
@@ -151,13 +147,14 @@ a:hover{color:var(--text)}
   .hero-intro .name{font-size:clamp(2.4rem,11.5vw,8rem);white-space:nowrap}
   .hero-intro .name .ln{display:inline-block;vertical-align:bottom}
   .hero-intro .name .ln+.ln{margin-left:.08em}
-  .hero-intro .eyebrow,.hero-intro .ctas,.hero-intro .socials{justify-content:center}
+  .hero-intro .ctas,.hero-intro .socials{justify-content:center}
   .hero-intro .ticker{margin-inline:auto}
   .console{width:100%;max-width:780px;margin-inline:auto;font-size:clamp(12.5px,2.1vw,16px)}
 }
 
-.eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;font-family:var(--f-mono);font-size:13px;letter-spacing:.04em;color:var(--accent);margin-bottom:22px}
-.live-dot{position:relative;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.eyebrow{display:block;font-family:var(--f-mono);font-size:13px;letter-spacing:.04em;color:var(--accent);margin-bottom:22px}
+.live-dot{position:relative;display:inline-block;vertical-align:middle;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.eyebrow .live-dot{margin:-2px 12px 0 0}
 .live-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--cyan);opacity:0}
 
 .name{font-family:var(--f-display);font-weight:500;font-size:clamp(3.2rem,9vw,10.5rem);line-height:.92;letter-spacing:-.02em}
@@ -383,7 +380,7 @@ section.block{position:relative;padding-block:clamp(56px,7vw,110px)}
 .contact{position:relative;overflow:hidden;isolation:isolate;-webkit-mask-image:linear-gradient(transparent,#000 48px);mask-image:linear-gradient(transparent,#000 48px)}
 .contact .orb-1{top:auto;bottom:-40%;left:-20%;opacity:.3}
 .contact .orb-2{top:10%;right:-20%;opacity:.2}
-.ct-head{font-family:var(--f-display);font-weight:500;font-size:clamp(3.4rem,13vw,13rem);line-height:.86;letter-spacing:-.025em}
+.ct-head{font-family:var(--f-display);font-weight:500;white-space:nowrap;font-size:clamp(2.6rem,14vw,12rem);line-height:.86;letter-spacing:-.025em}
 .ct-head .grad-text,.sh h2 .grad-text{filter:drop-shadow(0 0 40px rgba(139,92,246,.35))}
 .sh h2 .grad-text{padding-right:.08em}
 .ct-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);margin-top:clamp(28px,4vw,52px);align-items:start}

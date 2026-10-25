@@ -2,6 +2,26 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+  /* a reload always starts at the top: no restored scroll, no leftover #section */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  const toTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  toTop();
+  addEventListener('load', toTop);
+
+  /* scroll progress bar: eases toward scrollY / scrollable height every frame,
+     so the rings changing the page height never make the bar jump */
+  const bar = document.querySelector('.progress');
+  let shown = 0;
+  const drawBar = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const target = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    shown = reduce || Math.abs(target - shown) < 0.0005 ? target : shown + (target - shown) * 0.2;
+    bar.style.transform = `scaleX(${shown.toFixed(4)})`;
+    requestAnimationFrame(drawBar);
+  };
+  requestAnimationFrame(drawBar);
+
   /* hero spotlight follows the cursor */
   const hero = document.querySelector('.hero');
   if (finePointer && !reduce) {
