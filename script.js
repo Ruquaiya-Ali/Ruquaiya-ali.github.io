@@ -199,18 +199,30 @@
     document.addEventListener('visibilitychange', updatePaused);
     new IntersectionObserver(([en]) => { inView = en.isIntersecting; updatePaused(); }, { threshold: 0.3 }).observe(orbit);
 
-    // drag / swipe to spin; a tap on a side card brings it to the front
-    let downX = 0, downPos = 0, moved = false, downTarget = null;
+    // drag / swipe to spin; a tap on a side card brings it to the front.
+    // Touch waits until the finger picks a direction: sideways spins, up/down is left to the page scroll.
+    let downX = 0, downY = 0, downPos = 0, moved = false, pending = false, downTarget = null;
+    const begin = (e) => {
+      dragging = true; downPos = pos;
+      cancelAnimationFrame(anim); animating = false;
+      orbit.setPointerCapture(e.pointerId);
+      orbit.classList.add('dragging'); updatePaused();
+    };
     orbit.addEventListener('pointerdown', (e) => {
       if (e.button !== 0) return;
       if (e.pointerType === 'mouse' && e.target.closest('.face-scroll')) return; // let the mouse scroll/select the back face
       downTarget = e.target;
-      dragging = true; moved = false; downX = e.clientX; downPos = pos;
-      cancelAnimationFrame(anim); animating = false;
-      orbit.setPointerCapture(e.pointerId);
-      orbit.classList.add('dragging'); updatePaused();
+      moved = false; downX = e.clientX; downY = e.clientY; downPos = pos;
+      if (e.pointerType === 'mouse') begin(e); else pending = true;
     });
     orbit.addEventListener('pointermove', (e) => {
+      if (pending) {
+        const ax = Math.abs(e.clientX - downX), ay = Math.abs(e.clientY - downY);
+        if (Math.max(ax, ay) < 8) return;
+        pending = false;
+        if (ax <= ay) return; // vertical: let the page scroll
+        begin(e);
+      }
       if (!dragging) return;
       const dx = e.clientX - downX;
       if (Math.abs(dx) > 6) moved = true;
@@ -218,8 +230,14 @@
       layout();
     });
     const release = (e) => {
+      if (pending) { // touch that never moved: a tap
+        pending = false;
+        if (e.type !== 'pointerup') return;
+        cancelAnimationFrame(anim); animating = false; dragging = true;
+      }
       if (!dragging) return;
       dragging = false; orbit.classList.remove('dragging'); updatePaused();
+      if (e.type === 'pointercancel') return goTo(Math.round(pos)); // browser took over: settle, don't navigate
       if (!moved && e.type === 'pointerup') {
         const card = downTarget && downTarget.closest('.flipcard');
         if (card && card.classList.contains('front')) { pos = downPos; layout(); flipCard(card); return; }
